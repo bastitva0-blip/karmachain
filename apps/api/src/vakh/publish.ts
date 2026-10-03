@@ -12,7 +12,7 @@ import { kvGet } from "./store";
 
 const STUDIO: VakhAccount = { kind: "studio" };
 const PROOFS_KEY = "form:proofs";
-const pipelineKey = (recruiterKey: string) => `form:pipeline:${recruiterKey}`;
+export const pipelineKey = (recruiterKey: string) => `form:pipeline:${recruiterKey}`;
 const PostRef = z.object({ id: z.string() });
 
 const web = (path: string) => `${env.WEB_ORIGIN.replace(/\/$/, "")}${path}`;
@@ -21,12 +21,12 @@ export const vakhFormUrl = (formId: string, viewId?: string) =>
 export const vakhPostUrl = (postId: string) => `${env.VAKH_APP_URL}/post/${postId}`;
 
 export async function proofsFormId(): Promise<string | null> {
-  return (await kvGet<{ id: string }>(PROOFS_KEY))?.id ?? null;
+  return (await kvGet<{ id: string }>(PROOFS_KEY))?.id ?? env.VAKH_DIRECTORY_FORM_ID ?? null;
 }
 
 /** Creates (or re-finds) the public directory form in the studio account. */
 export async function setupStudio(): Promise<{ formId: string; url: string }> {
-  const formId = await withVakh(STUDIO, (call) => ensureForm(call, PROOFS_KEY, PROOFS_FORM, { syncLayout: true }));
+  const formId = await withVakh(STUDIO, (call) => ensureForm(call, PROOFS_KEY, PROOFS_FORM, { syncLayout: true, seedId: env.VAKH_DIRECTORY_FORM_ID }));
   return { formId, url: vakhFormUrl(formId) };
 }
 
@@ -72,6 +72,7 @@ export async function publishProof(analysisId: string): Promise<{ status: "publi
       profile: [web(`/u/${u.githubHandle}`)],
       evidence: [web(`/evidence/${a.evidenceHash}`)],
       token: [a.mintTx ? `${BASESCAN}/tx/${a.mintTx}` : web(`/u/${u.githubHandle}`)],
+      github: [`https://github.com/${u.githubHandle}`],
       verified_on: { start: new Date(a.createdAt).toISOString(), precision: "day" },
     };
 
@@ -79,7 +80,7 @@ export async function publishProof(analysisId: string): Promise<{ status: "publi
       // Re-check inside the retried unit so a retry never double-posts.
       const [fresh] = await db.select({ p: schema.analyses.vakhPostId }).from(schema.analyses).where(eq(schema.analyses.id, a.id)).limit(1);
       if (fresh?.p) return fresh.p;
-      const formId = await ensureForm(call, PROOFS_KEY, PROOFS_FORM);
+      const formId = await ensureForm(call, PROOFS_KEY, PROOFS_FORM, { seedId: env.VAKH_DIRECTORY_FORM_ID });
       const post = PostRef.parse(unwrapPost(await call("create_post", { form_id: formId, fields })));
       await db.update(schema.analyses).set({ vakhPostId: post.id }).where(eq(schema.analyses.id, a.id));
       return post.id;
@@ -170,7 +171,8 @@ export async function exportShortlist(recruiterKey: string, jobId: string, role:
   for (const r of proofRows) if (r.postId) proofsByHandle.set(r.handle, [...(proofsByHandle.get(r.handle) ?? []), r.postId]);
 
   return withVakh(account, async (call) => {
-    const formId = await ensureForm(call, pipelineKey(recruiterKey), pipelineForm(studioForm));
+    // syncLayout brings boards made before newer fields (interview, report, status) up to date.
+    const formId = await ensureForm(call, pipelineKey(recruiterKey), pipelineForm(studioForm), { syncLayout: true });
     const jobRef = `${role} · ${jobId.slice(0, 8)}`;
 
     // Skip candidates this job already exported (re-runs and retries stay idempotent).

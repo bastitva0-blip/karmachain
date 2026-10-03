@@ -4,6 +4,9 @@ import { app } from "./app";
 import { env } from "./env";
 import { getDb, schema } from "./db/client";
 import { log } from "./lib/logger";
+import { startPipelineSync } from "./vakh/pipeline";
+
+startPipelineSync();
 
 serve({ fetch: app.fetch, port: env.PORT, hostname: "0.0.0.0" }, (info) => {
   console.log(`karma-api listening on :${info.port}`);

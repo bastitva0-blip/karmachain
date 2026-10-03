@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ExternalLink, Loader2 } from "lucide-react";
+import { ExternalLink, Loader2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -12,6 +12,23 @@ import { recruiterHeaders } from "@/lib/recruiter-key";
 interface VakhStatus {
   directoryUrl: string | null;
   recruiter: { connected: boolean; displayName: string | null; pipelineUrl: string | null };
+}
+
+interface PipelineItem {
+  postId: string;
+  candidate: string;
+  role: string;
+  stage: string;
+  interviewUrl: string | null;
+  reportUrl: string | null;
+  status: string | null;
+}
+
+interface SyncResult {
+  formId: string | null;
+  items: PipelineItem[];
+  interviewsCreated: number;
+  reportsWritten: number;
 }
 
 interface ExportResult {
@@ -53,6 +70,7 @@ export function VakhExport({ jobSpecId, count }: { jobSpecId: string; count: num
       const r = await api<ExportResult>(`/recruiter/jobs/${jobSpecId}/vakh`, { method: "POST", headers: recruiterHeaders() });
       setResult(r);
       void qc.invalidateQueries({ queryKey: ["vakh-status"] });
+      void qc.invalidateQueries({ queryKey: ["vakh-pipeline"] });
       toast.success(r.created ? `Added ${r.created} candidate${r.created === 1 ? "" : "s"} to your Vakh pipeline` : "Your Vakh pipeline already has this shortlist");
     } catch (e) {
       if (e instanceof ApiError && e.code === "vakh_not_connected") {
@@ -61,6 +79,22 @@ export function VakhExport({ jobSpecId, count }: { jobSpecId: string; count: num
       } else toast.error(errorMessage(e));
     } finally {
       setBusy(null);
+    }
+  }
+
+  // The board in Vakh is the source of truth; this reads it back (and acts on stage moves).
+  const pipeline = useQuery({
+    queryKey: ["vakh-pipeline"],
+    queryFn: () => api<SyncResult>("/recruiter/vakh/sync", { method: "POST", headers: recruiterHeaders() }),
+    enabled: (status.data?.recruiter.connected ?? false) && Boolean(status.data?.recruiter.pipelineUrl ?? result),
+    refetchInterval: 60_000,
+    staleTime: 20_000,
+  });
+
+  async function syncNow() {
+    const r = await pipeline.refetch();
+    if (r.data && (r.data.interviewsCreated || r.data.reportsWritten)) {
+      toast.success(`From Vakh: ${r.data.interviewsCreated} interview(s) created, ${r.data.reportsWritten} report(s) posted`);
     }
   }
 
@@ -124,6 +158,41 @@ export function VakhExport({ jobSpecId, count }: { jobSpecId: string; count: num
         <p className="m-0 text-[13px] text-ink-dim" role="status">
           {result.created} added · {result.linkedProofs} proof link{result.linkedProofs === 1 ? "" : "s"}
         </p>
+      )}
+      {connected && boardUrl && (
+        <div className="flex flex-col gap-2 border-t border-border-soft pt-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h4 className="m-0 text-sm font-semibold">Your pipeline, read from Vakh</h4>
+            <Button size="sm" variant="ghost" onClick={syncNow} disabled={pipeline.isFetching}>
+              <RefreshCw className={pipeline.isFetching ? "animate-spin" : undefined} aria-hidden /> Sync
+            </Button>
+          </div>
+          <p className="m-0 text-[13px] leading-[1.5] text-ink-dim">
+            Move a card to <strong>Interviewing</strong> in Vakh and KarmaChain creates the AI interview and writes the link on the card. Reports come back the same way.
+          </p>
+          {pipeline.isError ? (
+            <p className="m-0 text-[13px] text-ink-dim">Couldn&apos;t read the board. {errorMessage(pipeline.error)}</p>
+          ) : pipeline.isLoading ? (
+            <p className="m-0 text-[13px] text-ink-dim">Reading your board…</p>
+          ) : !pipeline.data?.items.length ? (
+            <p className="m-0 text-[13px] text-ink-dim">No cards yet. Send the shortlist first.</p>
+          ) : (
+            <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
+              {pipeline.data.items.map((i) => (
+                <li key={i.postId} className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[13px]">
+                  <span className="font-medium">{i.candidate}</span>
+                  <span className="rounded-full border border-border px-2 py-px text-[12px] text-ink-muted">{i.stage}</span>
+                  {i.reportUrl ? (
+                    <a href={i.reportUrl} className="underline underline-offset-2">report</a>
+                  ) : i.interviewUrl ? (
+                    <a href={i.interviewUrl} className="underline underline-offset-2">interview link</a>
+                  ) : null}
+                  {i.status && <span className="basis-full text-ink-dim">{i.status}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
     </Card>
   );

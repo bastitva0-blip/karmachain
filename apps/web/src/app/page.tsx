@@ -7,6 +7,7 @@ import { TierBadge } from "@/components/tier-badge";
 import { Chariot } from "@/components/chariot";
 import { HearBrief } from "@/components/voice/hear-brief";
 import type { Tier } from "@karma/shared";
+import { VakhDirectoryLink } from "@/components/vakh/directory-link";
 import "./landing.css";
 
 const sanskrit = Tiro_Devanagari_Sanskrit({ weight: "400", subsets: ["devanagari"], display: "swap" });
@@ -243,6 +244,29 @@ export default function Home() {
             </div>
             <span className="text-[13px] text-ink-dim">12 signed endorsements · 3 from Top-tier devs</span>
           </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="vk" className="container-kc pb-20 md:pb-28">
+        <div className="grid gap-10 rounded-2xl border border-border p-6 md:grid-cols-2 md:p-10">
+          <div className="flex flex-col gap-3.5">
+            <span className="eyebrow text-[13px]">VAKH · PROOF THAT TRAVELS</span>
+            <h2 id="vk" className="display m-0 text-[36px] font-extrabold leading-[1.05]">
+              A public directory and a hiring board, both in Vakh
+            </h2>
+            <p className="m-0 leading-[1.6] text-ink-muted">
+              Every minted proof (opted-in developers only) becomes a structured post in a public Vakh directory. Recruiters send a shortlist
+              to their own Vakh board, and the board drives the process: move a card to Interviewing and KarmaChain creates the AI interview,
+              then writes the report back on the card.
+            </p>
+            <VakhDirectoryLink />
+          </div>
+          <ol className="m-0 flex list-decimal flex-col gap-3 pl-5 leading-[1.55] text-[#C9C4D6]">
+            <li>Developer mints a proof → KarmaChain posts it to the Verified Developers directory in Vakh.</li>
+            <li>Recruiter shortlists → cards land in their Vakh pipeline, each linked to the public proof posts.</li>
+            <li>Recruiter moves a card to Interviewing in Vakh → KarmaChain creates the voice interview and posts the link.</li>
+            <li>Candidate finishes → the report link and score appear on the card. Revoked proofs are archived.</li>
+          </ol>
         </div>
       </section>
 

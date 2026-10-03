@@ -11,6 +11,7 @@ import { findMatches } from "../recruiter/match";
 import { VakhToolError } from "../vakh/client";
 import { beginAuth, completeAuth, connection, disconnect, VakhNotConnectedError, type VakhAccount } from "../vakh/oauth";
 import { backfillProofs, exportShortlist, proofsFormId, setupStudio, vakhFormUrl, vakhPostUrl } from "../vakh/publish";
+import { syncPipeline } from "../vakh/pipeline";
 import { kvGet } from "../vakh/store";
 import type { AppEnv } from "../types";
 import { requireAdmin } from "./admin";
@@ -118,6 +119,17 @@ vakh.post("/recruiter/jobs/:id/vakh", rateLimit("vakh-export", 10, 10 * 60_000),
   if (!matches.length) throw badRequest("No matches to export yet");
   try {
     return c.json(await exportShortlist(account.recruiterKey, job.id, job.spec.title, matches));
+  } catch (err) {
+    vakhError(err);
+  }
+});
+
+/** Reads the recruiter's Vakh board back: stage moves create interviews, finished ones post reports. */
+vakh.post("/recruiter/vakh/sync", rateLimit("vakh-sync", 30, 10 * 60_000), async (c) => {
+  const account = recruiterAccount(c);
+  try {
+    const out = await syncPipeline(account.recruiterKey);
+    return c.json(out ?? { formId: null, items: [], interviewsCreated: 0, reportsWritten: 0 });
   } catch (err) {
     vakhError(err);
   }

@@ -47,6 +47,10 @@ const EnvSchema = z.object({
   VAKH_APP_URL: z.url().default("https://vakh.com"),
   /** Where Vakh redirects after OAuth. Must be the web origin's /api/vakh/callback (proxied to the API). */
   VAKH_CALLBACK_URL: z.url().default("http://localhost:3000/api/vakh/callback"),
+  /** Existing directory form to adopt when the studio account connects (keeps the public link stable). */
+  VAKH_DIRECTORY_FORM_ID: optional,
+  /** How often recruiter pipelines are read back from Vakh, in seconds. 0 turns the background sync off. */
+  VAKH_SYNC_INTERVAL_SEC: z.coerce.number().int().min(0).default(120),
 });
 
 export type Env = z.infer<typeof EnvSchema>;

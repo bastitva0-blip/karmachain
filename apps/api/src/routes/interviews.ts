@@ -48,18 +48,15 @@ async function handleOf(userId: string) {
   return u!;
 }
 
-interviews.post("/interviews", rateLimit("interviews", 10, 10 * 60_000), async (c) => {
-  const input = await body(
-    c,
-    z.object({ jobSpecId: z.string().min(1).max(64), candidateHandle: z.string().min(1).max(64), useStyle: z.boolean().default(true) }),
-  );
-  const job = await loadJobSpec(input.jobSpecId);
-  const candidate = await findUserByHandleOrAddress(input.candidateHandle);
+/** Creates an interview for a consenting candidate (also used by the Vakh pipeline sync). */
+export async function createInterview(jobSpecId: string, candidateHandle: string, useStyle: boolean): Promise<string> {
+  const job = await loadJobSpec(jobSpecId);
+  const candidate = await findUserByHandleOrAddress(candidateHandle);
   if (!candidate) throw notFound("Candidate not found");
   if (!candidate.consentSearchable) throw badRequest("This candidate has not opted in to recruiter contact");
   const plan = await buildPlan(
     { ...job.spec, interview: { ...job.spec.interview, durationMinutes: Math.min(job.spec.interview.durationMinutes, MAX_INTERVIEW_MINUTES) } },
-    input.useStyle ? job.style : null,
+    useStyle ? job.style : null,
     candidate,
   );
   const db = await getDb();
@@ -67,7 +64,15 @@ interviews.post("/interviews", rateLimit("interviews", 10, 10 * 60_000), async (
     .insert(schema.interviews)
     .values({ jobSpecId: job.id, candidateUserId: candidate.id, planJson: plan, status: "created" })
     .returning();
-  return c.json({ id: row!.id }, 201);
+  return row!.id;
+}
+
+interviews.post("/interviews", rateLimit("interviews", 10, 10 * 60_000), async (c) => {
+  const input = await body(
+    c,
+    z.object({ jobSpecId: z.string().min(1).max(64), candidateHandle: z.string().min(1).max(64), useStyle: z.boolean().default(true) }),
+  );
+  return c.json({ id: await createInterview(input.jobSpecId, input.candidateHandle, input.useStyle) }, 201);
 });
 
 interviews.get("/interviews/:id", async (c) => {
