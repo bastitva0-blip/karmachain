@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Interview pre-call</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+a{color:#B9A6FF}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.02em}
+.m{font-family:'IBM Plex Mono',monospace}
+.card{background:#13111C;border:1px solid #22202F;border-radius:16px}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#B9A6FF}
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 22px;background:#B9A6FF;color:#0B0A10;border:0;border-radius:12px;font:600 16px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.opt{display:flex;flex-direction:column;gap:6px;padding:18px;border:1px solid #3A3550;border-radius:14px;cursor:pointer}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh">
+<main style="max-width: 960px; margin: 0 auto; padding: 64px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="lbl">INTERVIEW · SENIOR BACKEND ENGINEER</span>
+<h1 class="d" style="margin: 0; font-size: 44px; font-weight: 800">Ready when you are, Arjun</h1>
+<p class="muted" style="margin: 0; font-size: 17px">About 3 minutes with Karma, a voice interviewer. One question at a time.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 20px">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-labelledby="q">
+<h2 id="q" class="d" style="margin: 0; font-size: 20px">What we'll cover</h2>
+<ol class="muted" style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; line-height: 1.5">
+<li>Testing strategy in your Top-tier TypeScript project</li>
+<li>Making a payment webhook idempotent</li>
+<li>Designing a retry queue under load</li>
+</ol>
+</section>
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-labelledby="mc">
+<h2 id="mc" class="d" style="margin: 0; font-size: 20px">Mic check</h2>
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #5EE6A8"></span><span>MacBook microphone</span></div>
+<div aria-label="Input level" style="display: flex; gap: 4px; align-items: flex-end; height: 32px">
+<span style="width: 6px; height: 30%; background: #5EE6A8; border-radius: 2px"></span><span style="width: 6px; height: 60%; background: #5EE6A8; border-radius: 2px"></span><span style="width: 6px; height: 90%; background: #5EE6A8; border-radius: 2px"></span><span style="width: 6px; height: 70%; background: #5EE6A8; border-radius: 2px"></span><span style="width: 6px; height: 40%; background: #5EE6A8; border-radius: 2px"></span><span style="width: 6px; height: 20%; background: #2A2638; border-radius: 2px"></span><span style="width: 6px; height: 20%; background: #2A2638; border-radius: 2px"></span>
+</div>
+<div style="padding: 14px; border-radius: 12px; background: #2A1717; border: 1px solid #4A2A2A; display: flex; flex-direction: column; gap: 4px"><span class="m" style="font-size: 12px; color: #FF9D8A">STATE · MIC BLOCKED</span><span style="font-size: 14px; color: #F3D5CF">Allow mic access in your browser bar, or choose text below.</span></div>
+</section>
+</div>
+<fieldset style="border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<legend class="d" style="font-size: 20px; font-weight: 700; margin-bottom: 12px">How do you want to answer?</legend>
+<label class="opt" style="border-color: #B9A6FF; background: #1B1728"><span style="display: flex; gap: 10px; align-items: center"><input type="radio" name="mode" checked style="accent-color: #B9A6FF"><strong>Voice</strong></span><span class="dim" style="font-size: 14px">Talk naturally. Live captions on screen.</span></label>
+<label class="opt"><span style="display: flex; gap: 10px; align-items: center"><input type="radio" name="mode" style="accent-color: #B9A6FF"><strong>Text</strong></span><span class="dim" style="font-size: 14px">Type answers. Questions can be read aloud.</span></label>
+</fieldset>
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 18px; border: 1px solid #22202F; border-radius: 14px; line-height: 1.5"><input type="checkbox" style="width: 20px; height: 20px; accent-color: #B9A6FF; margin-top: 2px"><span>I agree this call is recorded and transcribed. An AI drafts a report; a human makes the decision.</span></label>
+<a class="bp" href="InterviewLive.dc.html" style="align-self: flex-start">Start interview</a>
+<div class="card" style="padding: 18px; display: flex; gap: 12px; align-items: center"><span class="m dim" style="font-size: 12px">STATE · NOT FOUND</span><span class="muted" style="font-size: 14px">This interview link has expired or doesn't exist.</span></div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

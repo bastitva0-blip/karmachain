@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Live voice interview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07060B}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.02em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.ctl{width:64px;height:64px;border-radius:50%;border:1px solid #3A3550;background:#13111C;color:#EDEAF5;display:flex;align-items:center;justify-content:center;cursor:pointer}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.orb{animation:none!important}}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #07060B; min-height: 100vh; display: flex; flex-direction: column">
+<header style="padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1E1B29">
+<div style="display: flex; flex-direction: column; gap: 2px"><span class="d" style="font-weight: 700; font-size: 18px">Senior Backend Engineer</span><span class="dim" style="font-size: 13px">with Karma · recording</span></div>
+<div role="timer" aria-label="2 minutes 14 seconds left" style="display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px; background: #13111C; border: 1px solid #2A2638"><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF7A66"></span><span class="m" style="font-size: 16px">02:14</span><span class="dim" style="font-size: 13px">left · hard stop</span></div>
+</header>
+<main style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 48px; padding: 48px 24px">
+<div style="position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center">
+<div style="position: absolute; inset: 0; border-radius: 50%; border: 1px solid #B9A6FF33"></div>
+<div style="position: absolute; inset: 28px; border-radius: 50%; border: 1px solid #B9A6FF55"></div>
+<div class="orb" style="width: 176px; height: 176px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #E4DBFF, #B9A6FF 40%, #5B3FD6 100%); box-shadow: 0 0 80px #7C5CFF88; animation: pulse 1.6s ease-in-out infinite"></div>
+</div>
+<span class="m" style="font-size: 13px; color: #B9A6FF; letter-spacing: .08em">KARMA IS SPEAKING</span>
+<div aria-live="polite" style="max-width: 760px; width: 100%; display: flex; flex-direction: column; gap: 14px; text-align: center">
+<p class="dim" style="margin: 0; font-size: 17px; line-height: 1.5">You: "...so the test suite runs on every PR and blocks merges."</p>
+<p class="d" style="margin: 0; font-size: 28px; font-weight: 500; line-height: 1.35">"Good. Now, a payment webhook fires twice. How do you make sure the customer is charged only once?"</p>
+</div>
+<div style="display: flex; gap: 20px; align-items: center">
+<button class="ctl" type="button" aria-label="Mute microphone"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+<a href="Report.dc.html" aria-label="End interview" style="height: 64px; padding: 0 28px; border-radius: 999px; background: #E5484D; color: #fff; display: flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 15c5-5 13-5 18 0l-2 3-4-1v-3a10 10 0 0 0-6 0v3l-4 1z"/></svg>End</a>
+</div>
+</main>
+<footer style="padding: 20px 32px; display: flex; gap: 12px; flex-wrap: wrap; border-top: 1px solid #1E1B29">
+<span class="m dim" style="font-size: 12px; padding: 8px 12px; border: 1px solid #22202F; border-radius: 8px">STATE · CONNECTING… setting up a secure voice line</span>
+<span class="m" style="font-size: 12px; padding: 8px 12px; border: 1px solid #5A4420; border-radius: 8px; color: #F5C66B">STATE · VOICE QUOTA REACHED — switching to text, nothing lost</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

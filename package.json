@@ -1,0 +1,27 @@
+{
+  "name": "karmachain",
+  "private": true,
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"pnpm --filter @karma/api dev\" \"pnpm --filter @karma/web dev\"",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r --if-present test",
+    "format": "prettier --write .",
+    "seed": "pnpm --filter @karma/api seed",
+    "test:contracts": "pnpm --filter @karma/contracts test"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "@types/node": "22.20.4",
+    "concurrently": "10.0.5",
+    "eslint": "9.39.5",
+    "prettier": "3.9.9",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0"
+  }
+}

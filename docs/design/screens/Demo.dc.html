@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Guided demo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+a{color:#B9A6FF}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.025em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#B9A6FF}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px}
+.frame{background:#0E0C16;border:1px solid #2A2638;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px -30px #000}
+.bar{height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid #22202F;background:#13111C}
+.dot{width:10px;height:10px;border-radius:50%;background:#2A2638}
+.url{margin-left:12px;flex-grow:1;height:24px;border-radius:6px;background:#0B0A10;display:flex;align-items:center;padding:0 10px;font:12px 'IBM Plex Mono';color:#8E88A0}
+.mk{background:#13111C;border:1px solid #22202F;border-radius:12px}
+.hl{position:absolute;border:2px dashed #B9A6FF;border-radius:14px;pointer-events:none;box-shadow:0 0 0 6px #B9A6FF1A}
+.pin{position:absolute;display:flex;align-items:center;gap:6px;background:#B9A6FF;color:#0B0A10;font:600 12px 'IBM Plex Sans';padding:5px 10px;border-radius:999px;white-space:nowrap}
+.nav{height:48px;padding:0 20px;border-radius:12px;font:600 15px 'IBM Plex Sans';cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.nav:focus-visible,.stp:focus-visible{outline:2px solid #B9A6FF;outline-offset:3px}
+.stp{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:10px 12px;border-radius:10px;border:1px solid transparent;background:transparent;color:#B4AEC4;font:14px 'IBM Plex Sans';cursor:pointer}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.slide{animation:in .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 6px #B9A6FF1A}50%{box-shadow:0 0 0 12px #B9A6FF10}}
+.hl{animation:pulse 2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.slide,.hl{animation:none}}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh; display: flex; flex-direction: column">
+<header style="border-bottom: 1px solid #1E1B29">
+<div style="max-width: 1320px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #EDEAF5"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#B9A6FF"/><path d="M24 17v30M24 35l15-18M30 29l11 18" stroke="#0B0A10" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="d" style="font-weight: 700; font-size: 19px">KarmaChain</span><span class="tag" style="background: #1B1728; color: #B9A6FF; font-size: 12px">Guided demo</span></a>
+<span class="dim" style="font-size: 14px">Pre-filled with demo data · nothing is written on-chain</span>
+<a href="Main.dc.html" class="dim" style="font-size: 14px">Exit demo</a>
+</div>
+</header>
+
+<div style="flex-grow: 1; max-width: 1320px; width: 100%; margin: 0 auto; padding: 32px 24px; box-sizing: border-box; display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 32px; align-items: start">
+<nav aria-label="Demo steps" style="display: flex; flex-direction: column; gap: 4px; position: sticky; top: 24px">
+<span class="lbl" style="padding: 0 12px 10px">8 STEPS · ~3 MIN</span>
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="8">
+<button type="button" class="stp" onClick="{{s.pick}}" aria-current="{{s.current}}" style="{{s.style}}"><span class="m" style="font-size: 12px; width: 22px">{{s.n}}</span><span>{{s.name}}</span></button>
+</sc-for>
+</nav>
+
+<div style="display: flex; flex-direction: column; gap: 24px">
+<div role="progressbar" aria-label="Demo progress" aria-valuemin="1" aria-valuemax="8" aria-valuenow="{{num}}" style="height: 4px; background: #1E1B29; border-radius: 99px"><div style="{{barStyle}}"></div></div>
+
+<sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/dashboard</span></div>
+<div style="position: relative; padding: 28px; display: flex; flex-direction: column; gap: 16px; min-height: 380px">
+<div class="mk" style="padding: 18px; display: flex; justify-content: space-between; align-items: center"><div style="display: flex; gap: 12px; align-items: center"><span style="width: 26px; height: 26px; border-radius: 50%; background: #5EE6A8; color: #0B0A10; display: flex; align-items: center; justify-content: center; font-size: 14px">✓</span><span>Signed in as <strong>@priya-builds</strong></span></div><span class="dim m" style="font-size: 12px">read:user only</span></div>
+<div class="mk" style="padding: 18px; display: flex; flex-direction: column; gap: 12px"><strong>Link your wallet</strong><div style="padding: 14px; background: #0B0A10; border-radius: 10px; font: 13px/1.5 'IBM Plex Mono'; color: #C9C4D6">KarmaChain: link GitHub @priya-builds to 0x51ae…77b0. Nonce 8f2a. Expires 10:42</div><div style="display: flex; gap: 10px; align-items: center"><span class="tag" style="background: #10261D; color: #5EE6A8">Base Sepolia</span><span style="height: 36px; padding: 0 14px; border-radius: 8px; background: #B9A6FF; color: #0B0A10; display: inline-flex; align-items: center; font-weight: 600; font-size: 14px">Sign message</span></div></div>
+<div class="hl" style="left: 40px; right: 40px; top: 108px; height: 168px"></div><span class="pin" style="right: 52px; top: 94px">① One signature, no gas</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 1 · CONNECT</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">GitHub in, wallet linked</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>Read-only GitHub — public data only.</li><li>A signed message proves the wallet and GitHub belong to the same person.</li><li>Nonces are single-use, so a replayed signature fails.</li></ul><a href="Dashboard.dc.html" style="font-size: 14px">Open the real screen ↗</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/dashboard · analysing</span></div>
+<div style="position: relative; padding: 28px; display: flex; flex-direction: column; gap: 16px; min-height: 380px">
+<div class="mk" style="padding: 18px; display: flex; flex-direction: column; gap: 12px"><div style="display: flex; justify-content: space-between"><strong>Analysing 27 repositories</strong><span class="m" style="color: #B9A6FF">100%</span></div><div style="height: 6px; background: #241F33; border-radius: 99px"><div style="width: 100%; height: 100%; background: #B9A6FF; border-radius: 99px"></div></div><span class="dim" style="font-size: 13px">✓ 18 PRs merged into other people's repos found</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<div class="mk" style="padding: 14px; display: flex; flex-direction: column; gap: 6px"><strong class="d" style="font-size: 16px">TypeScript</strong><span class="d" style="font-size: 30px; font-weight: 800">82</span><span class="tag" style="background: #F5C66B; color: #2A1C00; align-self: flex-start">Top</span></div>
+<div class="mk" style="padding: 14px; display: flex; flex-direction: column; gap: 6px"><strong class="d" style="font-size: 16px">Python</strong><span class="d" style="font-size: 30px; font-weight: 800">58</span><span class="tag" style="background: #8FB8FF; color: #04122B; align-self: flex-start">Medium</span></div>
+<div class="mk" style="padding: 14px; display: flex; flex-direction: column; gap: 6px"><strong class="d" style="font-size: 16px">Go</strong><span class="d" style="font-size: 30px; font-weight: 800">29</span><span class="tag" style="background: #3A3550; color: #EDEAF5; align-self: flex-start">Basic</span></div>
+</div>
+<div class="mk" style="padding: 14px; display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; font-size: 13px"><span class="muted">Complexity</span><span class="m">22/25</span><span class="muted">Hygiene (tests, CI)</span><span class="m">24/25</span><span class="muted">Authorship</span><span class="m">17/20</span><span class="muted">External validation</span><span class="m">12/20</span><span class="muted">AI substance (capped)</span><span class="m">7/10</span></div>
+<div class="hl" style="left: 40px; right: 40px; bottom: 16px; height: 146px"></div><span class="pin" style="right: 52px; bottom: 152px">② AI can move the score by 10 at most</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 2 · PROOF</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">Scored per language, in under a minute</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>90 points from deterministic signals: tests, CI, authorship, stars, merged PRs.</li><li>The AI rubric reads sample files as untrusted data — injection can't inflate it.</li><li>Basic 0–39 · Medium 40–69 · Top 70–100.</li></ul></div>
+</section>
+</sc-if>
+
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/dashboard · minted</span></div>
+<div style="position: relative; padding: 28px; display: flex; gap: 20px; min-height: 380px; align-items: center; justify-content: center; flex-wrap: wrap">
+<div class="mk" style="width: 240px; padding: 22px; display: flex; flex-direction: column; gap: 12px; align-items: center; border-color: #5A4420; background: linear-gradient(180deg,#241D0E,#13111C)"><svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#F5C66B"/><path d="M24 17v30M24 35l15-18M30 29l11 18" stroke="#2A1C00" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><strong class="d" style="font-size: 20px">TypeScript · Top</strong><span class="m dim" style="font-size: 12px">SBT #0061 · 82/100</span><span class="m" style="font-size: 12px; color: #B9A6FF">tx 0x41c2…9a0d ↗</span></div>
+<div class="mk" style="width: 260px; padding: 18px; display: flex; flex-direction: column; gap: 10px; border-color: #4A2A2A"><span class="m" style="font-size: 12px; color: #FF9D8A">transferFrom(…) reverted</span><span style="font-size: 14px; line-height: 1.5">Soulbound: this token can't be transferred or sold.</span><span class="m dim" style="font-size: 12px">locked(61) → true</span></div>
+<div class="hl" style="right: 28px; top: 112px; width: 290px; height: 140px"></div><span class="pin" style="right: 40px; top: 98px">③ Try to transfer — it reverts</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 3 · SEAL</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">Minted as a soulbound token</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>ERC-5192 on Base Sepolia. Our relayer pays the gas.</li><li>Re-analysing upgrades the same token — no duplicates.</li><li>Admins can revoke fraud with a public reason.</li></ul><a href="MintSuccess.dc.html" style="font-size: 14px">Open the real screen ↗</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/u/priya-builds</span></div>
+<div style="position: relative; padding: 28px; display: flex; flex-direction: column; gap: 14px; min-height: 380px">
+<div style="display: flex; gap: 12px; align-items: center"><div style="width: 44px; height: 44px; border-radius: 50%; background: #2A2340; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #D6CBFF">PS</div><div style="display: flex; flex-direction: column"><strong class="d" style="font-size: 20px">@priya-builds</strong><span class="m dim" style="font-size: 12px">0x51ae…77b0</span></div></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px"><div class="mk" style="padding: 10px"><strong class="d">3</strong><div class="dim" style="font-size: 11px">SBTs</div></div><div class="mk" style="padding: 10px"><strong class="d">18</strong><div class="dim" style="font-size: 11px">ext. PRs</div></div><div class="mk" style="padding: 10px"><strong class="d">4</strong><div class="dim" style="font-size: 11px">reviews</div></div><div class="mk" style="padding: 10px"><strong class="d">5.2y</strong><div class="dim" style="font-size: 11px">age</div></div></div>
+<div class="mk" style="padding: 14px; display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between"><strong>TypeScript · 82</strong><span class="tag" style="background: #F5C66B; color: #2A1C00">Top</span></div><div style="padding: 10px; background: #0B0A10; border-radius: 8px; font: 12px/1.5 'IBM Plex Mono'; color: #C9C4D6">keccak256(evidence.json) = 0x9e4b…02fa<br>on-chain evidenceHash = 0x9e4b…02fa <span style="color: #5EE6A8">✓ match</span></div></div>
+<div class="mk" style="padding: 14px; font-size: 14px">★★★★★ "Shipped our offline-first app in a month." <span class="m dim" style="font-size: 11px">EAS · 0x19bd…</span></div>
+<div class="hl" style="left: 40px; right: 40px; top: 186px; height: 104px"></div><span class="pin" style="right: 52px; top: 172px">④ Anyone can re-hash the evidence</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 4 · PROFILE</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">A profile that checks itself</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>Skills read straight from the chain; reviews from EAS.</li><li>Every token links to evidence you can verify yourself.</li><li>"Hear brief" reads a 20-second summary aloud.</li></ul><a href="Profile.dc.html" style="font-size: 14px">Open the real screen ↗</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/recruiter</span></div>
+<div style="position: relative; padding: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; min-height: 380px">
+<div class="mk" style="padding: 14px; display: flex; flex-direction: column; gap: 10px; font-size: 13px"><div style="align-self: flex-start; padding: 10px 12px; background: #1B1728; border-radius: 10px">What role and how senior?</div><div style="align-self: flex-end; padding: 10px 12px; background: #B9A6FF; color: #0B0A10; border-radius: 10px">Frontend lead. React + TS, Top tier.</div><div style="align-self: flex-start; padding: 10px 12px; background: #1B1728; border-radius: 10px">Got it — tone for the interview?</div><div style="align-self: flex-end; padding: 10px 12px; background: #B9A6FF; color: #0B0A10; border-radius: 10px">Friendly but deep.</div></div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div class="mk" style="padding: 14px; display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between"><strong>#1 @priya-builds</strong><span class="m">0.93</span></div><span class="tag" style="background: #F5C66B; color: #2A1C00; align-self: flex-start">TypeScript · Top</span><span class="muted" style="font-size: 12px">CI + 81% test files · 18 external merged PRs</span><span style="height: 32px; border-radius: 8px; background: #B9A6FF; color: #0B0A10; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">Interview</span></div>
+<div class="mk" style="padding: 14px; display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><strong>#2 @arjun-dev</strong><span class="m">0.88</span></div><span class="muted" style="font-size: 12px">Top-tier TS repo with CI</span></div>
+</div>
+<div class="hl" style="right: 16px; top: 16px; width: calc(50% - 10px); height: 170px"></div><span class="pin" style="right: 28px; top: 2px">⑤ Every reason cites evidence</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 5 · MATCH</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">Describe the role. Get ranked proof.</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>Karma asks one question at a time and builds a job spec.</li><li>Only candidates who opted in appear.</li><li>Ranking: meaning + tier fit + external validation.</li></ul><a href="Recruiter.dc.html" style="font-size: 14px">Open the real screen ↗</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{s5}}" hint-placeholder-val="{{ false }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame" style="background: #07060B"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/interview/iv_42</span></div>
+<div style="position: relative; padding: 28px; display: flex; flex-direction: column; gap: 20px; align-items: center; justify-content: center; min-height: 380px">
+<span class="m" style="font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid #2A2638">● 01:46 left</span>
+<div style="width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #E4DBFF, #B9A6FF 40%, #5B3FD6); box-shadow: 0 0 60px #7C5CFF88"></div>
+<p aria-live="polite" class="d" style="margin: 0; font-size: 20px; text-align: center; max-width: 440px; line-height: 1.35">"Your sync PR resolved conflicts with CRDTs. Why not last-write-wins?"</p>
+<div class="hl" style="left: 60px; right: 60px; bottom: 30px; height: 84px"></div><span class="pin" style="right: 72px; bottom: 100px">⑥ Questions come from her evidence</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 6 · INTERVIEW</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">A 3-minute voice interview</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>ElevenLabs agent, configured per role: tracks, difficulty, tone.</li><li>Live captions for every word spoken.</li><li>Quota out? It switches to text without losing the session.</li></ul><a href="InterviewLive.dc.html" style="font-size: 14px">Open the real screen ↗</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{s6}}" hint-placeholder-val="{{ false }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/interview/iv_42/report</span></div>
+<div style="position: relative; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-height: 380px">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div class="mk" style="padding: 12px; display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-size: 13px">Technical depth</span><strong class="d">4/5</strong></div><span style="font-size: 12px; padding: 8px; background: #0B0A10; border-radius: 6px">"CRDTs let both edits survive…" <span class="m dim">00:52</span></span></div>
+<div class="mk" style="padding: 12px; display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-size: 13px">Clarity</span><strong class="d">5/5</strong></div><span style="font-size: 12px; padding: 8px; background: #0B0A10; border-radius: 6px">"Two parts: the data, then the UX." <span class="m dim">00:21</span></span></div>
+<div class="mk" style="padding: 12px; display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-size: 13px">Problem solving</span><strong class="d">4/5</strong></div></div>
+<div class="mk" style="padding: 12px; display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-size: 13px">Role fit</span><span class="dim" style="font-size: 12px">Not enough evidence</span></div></div>
+</div>
+<div style="padding: 10px 12px; border-radius: 8px; background: #241D0E; color: #E8D6B0; font-size: 12px">AI-assisted. A human makes the hiring decision.</div>
+<div class="mk" style="padding: 12px; display: flex; justify-content: space-between; align-items: center"><span class="m dim" style="font-size: 12px">report hash 0x3fa1…e88c</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: #B9A6FF; color: #0B0A10; display: inline-flex; align-items: center; font-weight: 600; font-size: 13px">Anchor on-chain</span></div>
+<div class="hl" style="left: 16px; right: 16px; top: 16px; height: 112px"></div><span class="pin" style="right: 28px; top: 2px">⑦ Every score is backed by a quote</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 7 · REPORT</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">Evidence, not vibes</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>Four scores, each with verbatim timestamped quotes.</li><li>No accent, tone or personality scoring.</li><li>The candidate can anchor the result hash on-chain.</li></ul><a href="Report.dc.html" style="font-size: 14px">Open the real screen ↗</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{s7}}" hint-placeholder-val="{{ false }}">
+<section class="slide" style="display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center">
+<div class="frame"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">karmachain.app/feed</span></div>
+<div style="position: relative; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-height: 380px">
+<div class="mk" style="padding: 12px; display: flex; gap: 10px; align-items: center"><span class="dim" style="flex-grow: 1; font-size: 14px">Share what you shipped…</span><span class="tag" style="background: #1B1728; color: #B9A6FF">+ Attach proof</span></div>
+<div class="mk" style="padding: 16px; display: flex; flex-direction: column; gap: 10px"><strong style="font-size: 14px">Priya Sharma <span class="dim" style="font-weight: 400">· 2h</span></strong><span style="font-size: 14px; line-height: 1.5">Got my offline-sync PR merged into a 4k★ repo. Three lessons on conflict resolution.</span><div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="tag" style="background: #10261D; color: #5EE6A8">✓ Merged PR · verified</span><span class="tag" style="background: #F5C66B; color: #2A1C00">TypeScript · Top</span></div><div style="display: flex; gap: 16px; font-size: 13px" class="muted"><span>✍ 12 signed endorsements</span><span>3 from Top-tier devs</span></div></div>
+<div class="hl" style="left: 32px; right: 32px; top: 168px; height: 76px"></div><span class="pin" style="right: 44px; top: 154px">⑧ No proof, no boost</span>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="lbl">STEP 8 · SHARE</span><h2 class="d" style="margin: 0; font-size: 36px; font-weight: 800">A feed with receipts</h2><ul class="muted" style="margin: 0; padding-left: 18px; line-height: 1.6"><li>Posts attach a token, PR, review or interview anchor.</li><li>Endorsements are wallet signatures, weighted by the endorser's tier.</li><li>Ranked by evidence — not engagement bait.</li></ul><a href="Feed.dc.html" style="font-size: 14px">Open the real screen ↗</a></div>
+</section>
+</sc-if>
+
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 8px; border-top: 1px solid #1E1B29">
+<button type="button" class="nav" onClick="{{prev}}" style="background: transparent; border: 1px solid #3A3550; color: #EDEAF5">← Back</button>
+<span class="m dim" style="font-size: 13px">{{num}} / 8</span>
+<button type="button" class="nav" onClick="{{next}}" style="background: #B9A6FF; border: 0; color: #0B0A10">{{nextLabel}}</button>
+</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { i: 0 }; }
+  renderVals() {
+    const names = ['Connect','Proof','Seal','Profile','Match','Interview','Report','Proof feed'];
+    const i = this.state.i;
+    const v = {
+      steps: names.map((name, k) => ({
+        n: String(k + 1).padStart(2, '0'), name,
+        current: k === i ? 'step' : 'false',
+        style: k === i ? { background: '#1B1728', borderColor: '#B9A6FF', color: '#EDEAF5' } : (k < i ? { color: '#EDEAF5' } : {}),
+        pick: () => this.setState({ i: k })
+      })),
+      num: i + 1,
+      barStyle: { width: ((i + 1) / 8 * 100) + '%', height: '100%', background: '#B9A6FF', borderRadius: '99px', transition: 'width .4s' },
+      prev: () => this.setState({ i: Math.max(0, i - 1) }),
+      next: () => this.setState({ i: i === 7 ? 0 : i + 1 }),
+      nextLabel: i === 7 ? 'Start over' : 'Next →'
+    };
+    for (let k = 0; k < 8; k++) v['s' + k] = k === i;
+    return v;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Privacy and fairness</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+a{color:#B9A6FF}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.025em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#B9A6FF}
+.card{background:#13111C;border:1px solid #22202F;border-radius:16px}
+th{text-align:left;font:500 12px 'IBM Plex Mono';letter-spacing:.06em;color:#8E88A0;padding:12px 16px;border-bottom:1px solid #22202F}
+td{padding:14px 16px;border-bottom:1px solid #1E1B29;vertical-align:top;line-height:1.5}
+.y{color:#5EE6A8;font-weight:600}.n{color:#FF9D8A;font-weight:600}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh">
+<header style="border-bottom: 1px solid #1E1B29"><div style="max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center"><a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #EDEAF5"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#B9A6FF"/><path d="M24 17v30M24 35l15-18M30 29l11 18" stroke="#0B0A10" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="d" style="font-weight: 700; font-size: 19px">KarmaChain</span></a></div></header>
+<main style="max-width: 1100px; margin: 0 auto; padding: 56px 24px 96px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px"><span class="lbl">/privacy</span><h1 class="d" style="margin: 0; font-size: 52px; font-weight: 800; line-height: 1">What we read, store and never do</h1><p class="muted" style="margin: 0; font-size: 18px; line-height: 1.55">Plain language, no legalese. If something here changes, this page changes first.</p></div>
+
+<section aria-labelledby="t1" class="card" style="overflow: hidden">
+<h2 id="t1" class="d" style="margin: 0; padding: 22px 16px 10px; font-size: 24px">Your data, line by line</h2>
+<table style="width: 100%; border-collapse: collapse; font-size: 15px">
+<thead><tr><th scope="col">DATA</th><th scope="col">WHERE IT LIVES</th><th scope="col">CAN YOU DELETE IT?</th></tr></thead>
+<tbody>
+<tr><td><strong>Public GitHub repos &amp; PRs</strong><br><span class="dim">read-only, never write access</span></td><td>Read during analysis, not copied</td><td class="y">Nothing stored</td></tr>
+<tr><td><strong>Your code</strong></td><td>Up to 3 sample files per language sent to the AI, then discarded. Zip uploads stay in memory only.</td><td class="y">Never stored</td></tr>
+<tr><td><strong>Scores &amp; evidence JSON</strong></td><td>Our database</td><td class="y">Yes — Delete my data</td></tr>
+<tr><td><strong>Evidence hash &amp; tier</strong></td><td>On-chain, inside your soulbound token</td><td class="n">Can't be erased · can be burned</td></tr>
+<tr><td><strong>GitHub login token</strong></td><td>Encrypted, used only for analysis</td><td class="y">Deleted on logout</td></tr>
+<tr><td><strong>Interview audio &amp; transcript</strong></td><td>ElevenLabs + our database, with your consent</td><td class="y">Yes</td></tr>
+<tr><td><strong>Client reviews</strong></td><td>EAS attestation (on-chain) signed by the client</td><td class="n">Revocable by the client</td></tr>
+</tbody></table>
+</section>
+
+<section aria-labelledby="t2" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="t2" class="d" style="margin: 0; font-size: 28px">Fairness rules we hold ourselves to</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 12px">
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 8px"><strong class="d" style="font-size: 19px">Opt-in to be found</strong><span class="muted" style="line-height: 1.5">Recruiters only see you if you turn on "Let recruiters find me".</span></div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 8px"><strong class="d" style="font-size: 19px">Consent before recording</strong><span class="muted" style="line-height: 1.5">No interview starts until you tick the recording box.</span></div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 8px"><strong class="d" style="font-size: 19px">No automatic rejection</strong><span class="muted" style="line-height: 1.5">Reports support decisions. A human always makes them.</span></div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 8px"><strong class="d" style="font-size: 19px">No accent or personality scores</strong><span class="muted" style="line-height: 1.5">Soft skills appear only as quoted evidence, never as a number.</span></div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 8px"><strong class="d" style="font-size: 19px">AI can't decide alone</strong><span class="muted" style="line-height: 1.5">The AI adds at most 10 of 100 points and can never trigger a transaction.</span></div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 8px"><strong class="d" style="font-size: 19px">Demo data is labelled</strong><span class="muted" style="line-height: 1.5">Every seeded profile carries a Demo badge. No fake users.</span></div>
+</div>
+</section>
+
+<section class="card" style="padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap"><div style="display: flex; flex-direction: column; gap: 6px"><strong class="d" style="font-size: 22px">Want out?</strong><span class="muted">Delete everything we store from your dashboard in one click.</span></div><a href="Dashboard.dc.html" style="display: inline-flex; align-items: center; height: 48px; padding: 0 20px; border-radius: 12px; border: 1px solid #4A2A2A; color: #FF9D8A; text-decoration: none; font-weight: 600">Go to Delete my data</a></section>
+<p class="dim" style="margin: 0; font-size: 13px">Testnet only (Base Sepolia). Contracts: <a class="m" href="#">0xKarmaSBT…</a> · Last updated 2 Oct 2026</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1640}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

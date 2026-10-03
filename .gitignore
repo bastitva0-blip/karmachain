@@ -1,0 +1,15 @@
+node_modules
+.next
+dist
+out
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+packages/contracts/out
+packages/contracts/cache
+packages/contracts/broadcast
+next-env.d.ts
+*.tsbuildinfo
+.data

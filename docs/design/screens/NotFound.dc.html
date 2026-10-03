@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Not found and error</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.03em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.bp{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 22px;background:#B9A6FF;color:#0B0A10;border-radius:12px;font:600 16px 'IBM Plex Sans';text-decoration:none}
+.bg{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 22px;border:1px solid #3A3550;color:#EDEAF5;border-radius:12px;font:500 16px 'IBM Plex Sans';text-decoration:none;background:transparent;cursor:pointer}
+@keyframes spin{to{transform:rotate(360deg)}}
+.w{transform-origin:100px 100px;animation:spin 18s linear infinite}
+@media (prefers-reduced-motion:reduce){.w{animation:none}}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr))">
+<main style="padding: 80px 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; border-right: 1px solid #1E1B29">
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" stroke="#B9A6FF" stroke-width="3" aria-hidden="true"><g class="w" opacity=".5"><circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="14"/><path d="M100 20V180M20 100H180M43 43L157 157M157 43L43 157"/></g><path d="M86 70v60M86 104l30-34M98 92l22 38" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>
+<span class="m" style="font-size: 14px; color: #B9A6FF; letter-spacing: .1em">404</span>
+<h1 class="d" style="margin: 0; font-size: 52px; font-weight: 800; line-height: 1">This page left the chariot</h1>
+<p class="muted" style="margin: 0; max-width: 420px; line-height: 1.55; font-size: 17px">The link may be old, or the profile was deleted by its owner.</p>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center"><a class="bp" href="Main.dc.html">Back home</a><a class="bg" href="Verify.dc.html">Verify a hash</a></div>
+</main>
+<section aria-label="Error state" style="padding: 80px 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; background: #0E0C16">
+<svg width="120" height="120" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="#FF9D8A" stroke-width="3" stroke-dasharray="6 5"/><path d="M32 18v18M32 44v2" stroke="#FF9D8A" stroke-width="5" stroke-linecap="round"/></svg>
+<span class="m" style="font-size: 14px; color: #FF9D8A; letter-spacing: .1em">500 · SOMETHING BROKE</span>
+<h2 class="d" style="margin: 0; font-size: 44px; font-weight: 800; line-height: 1">That's on us</h2>
+<p class="muted" style="margin: 0; max-width: 420px; line-height: 1.55; font-size: 17px">Nothing on-chain was affected. Try again — if it keeps happening, share this code with us.</p>
+<span class="m" style="padding: 8px 14px; border-radius: 8px; background: #13111C; border: 1px solid #22202F; font-size: 13px">req_7f3a91c2</span>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center"><button class="bp" type="button" style="border: 0">Try again</button><a class="bg" href="Main.dc.html">Back home</a></div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":820}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

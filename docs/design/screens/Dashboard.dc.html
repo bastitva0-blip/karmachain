@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+a{color:#B9A6FF}a:hover{color:#D6CBFF}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.02em}
+.m{font-family:'IBM Plex Mono',monospace}
+.card{background:#13111C;border:1px solid #22202F;border-radius:16px}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#B9A6FF}
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;background:#B9A6FF;color:#0B0A10;border:0;border-radius:10px;font:600 15px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.bg{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;background:transparent;color:#EDEAF5;border:1px solid #3A3550;border-radius:10px;font:500 15px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.bp:focus-visible,.bg:focus-visible{outline:2px solid #B9A6FF;outline-offset:3px}
+.sk{background:linear-gradient(90deg,#1A1726,#241F33,#1A1726);border-radius:8px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh">
+<header style="border-bottom: 1px solid #1E1B29">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #EDEAF5"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#B9A6FF"/><path d="M24 17v30M24 35l15-18M30 29l11 18" stroke="#0B0A10" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="d" style="font-weight: 700; font-size: 19px">KarmaChain</span></a>
+<nav aria-label="Primary" style="display: flex; gap: 24px; font-size: 15px"><a href="Dashboard.dc.html" aria-current="page" style="color: #EDEAF5; text-decoration: none; font-weight: 600">Dashboard</a><a href="Profile.dc.html" style="color: #B4AEC4; text-decoration: none">My profile</a><a href="Import.dc.html" style="color: #B4AEC4; text-decoration: none">Import</a></nav>
+<div style="display: flex; align-items: center; gap: 10px"><span class="m dim" style="font-size: 13px">@arjun-dev</span><div style="width: 36px; height: 36px; border-radius: 50%; background: #2A2340; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #B9A6FF; font-size: 13px">AR</div></div>
+</div>
+</header>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 32px; align-items: start">
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px">
+<h1 class="d" style="margin: 0; font-size: 40px; font-weight: 800">Turn your GitHub into proof</h1>
+<p class="muted" style="margin: 0; font-size: 16px">We read public repos and PRs only. We store your scores and evidence — never your code.</p>
+</div>
+
+<ol aria-label="Progress" style="grid-column: 1 / -1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 8px">
+<li style="display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 12px; background: #13111C; border: 1px solid #22202F"><span style="width: 26px; height: 26px; border-radius: 50%; background: #5EE6A8; color: #0B0A10; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span style="font-weight: 500">GitHub</span><span class="dim" style="font-size: 13px; margin-left: auto">Done</span></li>
+<li style="display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 12px; background: #13111C; border: 1px solid #22202F"><span style="width: 26px; height: 26px; border-radius: 50%; background: #5EE6A8; color: #0B0A10; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><span style="font-weight: 500">Wallet</span><span class="dim" style="font-size: 13px; margin-left: auto">Done</span></li>
+<li aria-current="step" style="display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 12px; background: #1B1728; border: 1px solid #B9A6FF"><span class="m" style="width: 26px; height: 26px; border-radius: 50%; border: 2px solid #B9A6FF; color: #B9A6FF; display: flex; align-items: center; justify-content: center; font-size: 13px">3</span><span style="font-weight: 600">Analyse</span><span class="m" style="font-size: 13px; margin-left: auto; color: #B9A6FF">62%</span></li>
+<li style="display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 12px; border: 1px solid #22202F"><span class="m dim" style="width: 26px; height: 26px; border-radius: 50%; border: 2px solid #3A3550; display: flex; align-items: center; justify-content: center; font-size: 13px">4</span><span class="dim" style="font-weight: 500">Mint</span></li>
+</ol>
+
+<div style="display: flex; flex-direction: column; gap: 20px; grid-column: span 2">
+<section class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 20px" aria-labelledby="an">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="lbl">STEP 3</span><h2 id="an" class="d" style="margin: 0; font-size: 26px">Analysing 23 repositories</h2></div>
+<span class="m dim" style="font-size: 13px">about 40 s left</span>
+</div>
+<div role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="Analysis progress" style="height: 8px; background: #241F33; border-radius: 99px"><div style="width: 62%; height: 100%; background: #B9A6FF; border-radius: 99px"></div></div>
+<ul aria-live="polite" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+<li style="display: flex; gap: 12px; align-items: center"><span style="color: #5EE6A8">✓</span>Collected repos, languages and file trees</li>
+<li style="display: flex; gap: 12px; align-items: center"><span style="color: #5EE6A8">✓</span>Found 14 PRs merged into other people's projects</li>
+<li style="display: flex; gap: 12px; align-items: center"><span style="width: 14px; height: 14px; border: 2px solid #B9A6FF; border-top-color: transparent; border-radius: 50%"></span><strong style="font-weight: 600">Reading sample files for code quality</strong></li>
+<li class="dim" style="display: flex; gap: 12px; align-items: center"><span>○</span>Scoring each language and building evidence</li>
+</ul>
+</section>
+
+<section class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 20px" aria-labelledby="tr">
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="lbl">STEP 4 · PREVIEW WHEN DONE</span><h2 id="tr" class="d" style="margin: 0; font-size: 26px">Your tiers</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px">
+<div style="padding: 20px; border: 1px solid #2A2638; border-radius: 14px; background: #0B0A10; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="d" style="font-size: 20px; font-weight: 700">TypeScript</span><span class="tag" style="background: #F5C66B; color: #2A1C00">Top</span></div>
+<div style="display: flex; align-items: baseline; gap: 6px"><span class="d" style="font-size: 40px; font-weight: 800">80</span><span class="dim">/100</span></div>
+<button class="bp" type="button">Mint soulbound token</button>
+</div>
+<div style="padding: 20px; border: 1px solid #2A2638; border-radius: 14px; background: #0B0A10; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="d" style="font-size: 20px; font-weight: 700">Python</span><span class="tag" style="background: #8FB8FF; color: #04122B">Medium</span></div>
+<div style="display: flex; align-items: baseline; gap: 6px"><span class="d" style="font-size: 40px; font-weight: 800">54</span><span class="dim">/100</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 14px; color: #5EE6A8">Minted · token #0043</span><a class="m" href="#" style="font-size: 12px">tx 0x41c2…9a0d ↗</a></div>
+</div>
+<div style="padding: 20px; border: 1px dashed #3A3550; border-radius: 14px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="d" style="font-size: 20px; font-weight: 700">Go</span><span class="tag" style="background: #3A3550; color: #EDEAF5">Basic</span></div>
+<div style="display: flex; align-items: baseline; gap: 6px"><span class="d" style="font-size: 40px; font-weight: 800">31</span><span class="dim">/100</span></div>
+<span class="dim" style="font-size: 13px">Self-declared (from zip) · can't be minted</span>
+</div>
+</div>
+</section>
+</div>
+
+<aside style="display: flex; flex-direction: column; gap: 20px">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-labelledby="w">
+<span class="lbl">CONNECTED</span>
+<h2 id="w" class="d" style="margin: 0; font-size: 20px">Wallet</h2>
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="m" style="font-size: 14px">0x7a3f…c91e</span><span class="tag" style="background: #10261D; color: #5EE6A8">Base Sepolia</span></div>
+<span class="dim" style="font-size: 13px">Linked to @arjun-dev by signature</span>
+</section>
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 18px" aria-labelledby="pv">
+<span class="lbl">PRIVACY</span>
+<h2 id="pv" class="d" style="margin: 0; font-size: 20px">You're in control</h2>
+<label style="display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer">
+<span style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 600">Let recruiters find me</span><span class="dim" style="font-size: 13px">Off by default. Turn off anytime.</span></span>
+<input type="checkbox" role="switch" checked style="width: 46px; height: 26px; accent-color: #B9A6FF">
+</label>
+<div style="height: 1px; background: #22202F"></div>
+<button class="bg" type="button" style="color: #FF9D8A; border-color: #4A2A2A">Delete my data</button>
+<span class="dim" style="font-size: 12px; line-height: 1.5">Tokens already on-chain stay there; we remove everything we store.</span>
+</section>
+</aside>
+
+<section style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 16px; padding-top: 32px; border-top: 1px solid #1E1B29">
+<span class="lbl">OTHER STATES OF THIS PAGE</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px"><span class="dim m" style="font-size: 12px">LOADING</span><div class="sk" style="height: 22px; width: 60%"></div><div class="sk" style="height: 12px"></div><div class="sk" style="height: 12px; width: 80%"></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px"><span class="dim m" style="font-size: 12px">SIGNED OUT</span><strong class="d" style="font-size: 18px">Sign in to start</strong><span class="muted" style="font-size: 14px">Read-only access to public data.</span><a class="bp" href="#">Continue with GitHub</a></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; border-color: #5A4420"><span class="m" style="font-size: 12px; color: #F5C66B">WRONG NETWORK</span><strong class="d" style="font-size: 18px">Switch to Base Sepolia</strong><span class="muted" style="font-size: 14px">Your wallet is on Ethereum mainnet.</span><button class="bp" type="button">Switch network</button></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; border-color: #4A2A2A"><span class="m" style="font-size: 12px; color: #FF9D8A">ANALYSIS FAILED</span><strong class="d" style="font-size: 18px">GitHub rate limit hit</strong><span class="muted" style="font-size: 14px">Nothing was lost. Try again in a minute.</span><button class="bg" type="button">Retry</button></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px"><span class="dim m" style="font-size: 12px">NO RESULTS YET</span><strong class="d" style="font-size: 18px">No tiers yet</strong><span class="muted" style="font-size: 14px">Run an analysis to see your languages.</span><button class="bp" type="button">Start analysis</button></div>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1640}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

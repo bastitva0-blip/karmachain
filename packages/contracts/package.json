@@ -1,0 +1,16 @@
+{
+  "name": "@karma/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test",
+    "deploy": "bash -c 'set -a; . ../../.env; set +a; forge script script/Deploy.s.sol --rpc-url base_sepolia --broadcast'",
+    "register-schemas": "bash -c 'set -a; . ../../.env; set +a; forge script script/RegisterSchemas.s.sol --rpc-url base_sepolia --broadcast'",
+    "demo:soulbound": "bash -c 'set -a; . ../../.env; set +a; bash script/demo-soulbound.sh'"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.6.1",
+    "forge-std": "github:foundry-rs/forge-std#v1.17.0"
+  }
+}

@@ -1,0 +1,105 @@
+/* Landing-only motion. Global reduced-motion rule in globals.css also applies. */
+@keyframes kc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes kc-wave {
+  0%,
+  100% {
+    transform: skewY(0deg);
+  }
+  50% {
+    transform: skewY(-4deg);
+  }
+}
+@keyframes kc-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+@keyframes kc-ray {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+@keyframes kc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes kc-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.kc-wheel {
+  transform-origin: 520px 410px;
+  animation: kc-spin 14s linear infinite;
+}
+.kc-flag {
+  transform-origin: 620px 140px;
+  animation: kc-wave 3s ease-in-out infinite;
+}
+.kc-halo {
+  animation: kc-glow 4s ease-in-out infinite;
+}
+.kc-ray {
+  stroke-dasharray: 6 10;
+  animation: kc-ray 1.6s linear infinite;
+}
+.kc-rise {
+  animation: kc-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.kc-r2 {
+  animation-delay: 0.12s;
+}
+.kc-r3 {
+  animation-delay: 0.24s;
+}
+.kc-r4 {
+  animation-delay: 0.36s;
+}
+.kc-float {
+  animation: kc-float 6s ease-in-out infinite;
+}
+.kc-lift {
+  transition:
+    transform 0.25s,
+    border-color 0.25s;
+}
+.kc-lift:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong, #3a3550);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-wheel,
+  .kc-flag,
+  .kc-halo,
+  .kc-ray,
+  .kc-rise,
+  .kc-float {
+    animation: none;
+  }
+  .kc-lift {
+    transition: none;
+  }
+  .kc-lift:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Interviews</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+a{color:#B9A6FF}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.025em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#B9A6FF}
+.card{background:#13111C;border:1px solid #22202F;border-radius:16px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.bp{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 14px;background:#B9A6FF;color:#0B0A10;border-radius:10px;font:600 14px 'IBM Plex Sans';text-decoration:none}
+.bg{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 14px;border:1px solid #3A3550;color:#EDEAF5;border-radius:10px;font:500 14px 'IBM Plex Sans';text-decoration:none;background:transparent;cursor:pointer}
+.chip{height:36px;padding:0 14px;border-radius:999px;border:1px solid #3A3550;background:transparent;color:#B4AEC4;font:14px 'IBM Plex Sans';cursor:pointer}
+th{text-align:left;font:500 12px 'IBM Plex Mono';letter-spacing:.06em;color:#8E88A0;padding:12px 16px;border-bottom:1px solid #22202F}
+td{padding:16px;border-bottom:1px solid #1E1B29;vertical-align:middle}
+.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh">
+<header style="border-bottom: 1px solid #1E1B29"><div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #EDEAF5"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#B9A6FF"/><path d="M24 17v30M24 35l15-18M30 29l11 18" stroke="#0B0A10" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="d" style="font-weight: 700; font-size: 19px">KarmaChain</span><span class="tag" style="background: #1B1728; color: #B9A6FF">Recruiter</span></a>
+<nav aria-label="Recruiter" style="display: flex; gap: 24px; font-size: 15px"><a href="Recruiter.dc.html" style="color: #B4AEC4; text-decoration: none">Find candidates</a><a href="#" aria-current="page" style="color: #EDEAF5; text-decoration: none; font-weight: 600">Interviews</a></nav>
+<div class="av" style="background: #1E2A3D; color: #8FB8FF">PS</div>
+</div></header>
+<main style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap"><div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">/recruiter/interviews</span><h1 class="d" style="margin: 0; font-size: 40px; font-weight: 800">Interviews</h1></div><a class="bp" href="Recruiter.dc.html" style="height: 44px">+ New interview</a></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+<div class="card" style="padding: 18px"><div class="d" style="font-size: 30px; font-weight: 800">12</div><div class="muted" style="font-size: 14px">Total</div></div>
+<div class="card" style="padding: 18px"><div class="d" style="font-size: 30px; font-weight: 800; color: #FF7A66">1</div><div class="muted" style="font-size: 14px">Live now</div></div>
+<div class="card" style="padding: 18px"><div class="d" style="font-size: 30px; font-weight: 800; color: #B9A6FF">2</div><div class="muted" style="font-size: 14px">Writing report</div></div>
+<div class="card" style="padding: 18px"><div class="d" style="font-size: 30px; font-weight: 800; color: #5EE6A8">8</div><div class="muted" style="font-size: 14px">Reports ready</div></div>
+</div>
+<div role="group" aria-label="Filter" style="display: flex; gap: 8px; flex-wrap: wrap"><button class="chip" type="button" aria-pressed="true" style="background: #1B1728; border-color: #B9A6FF; color: #EDEAF5">All</button><button class="chip" type="button" aria-pressed="false">Live</button><button class="chip" type="button" aria-pressed="false">Processing</button><button class="chip" type="button" aria-pressed="false">Done</button><button class="chip" type="button" aria-pressed="false">Failed</button><span style="flex-grow: 1"></span><label><span style="position: absolute; width: 1px; height: 1px; overflow: hidden">Role</span><select style="height: 36px; padding: 0 12px; background: #13111C; border: 1px solid #3A3550; border-radius: 10px; color: #EDEAF5; font: 14px 'IBM Plex Sans'"><option>All roles</option><option>Frontend Lead</option><option>Senior Backend Engineer</option></select></label></div>
+<div class="card" style="overflow: hidden">
+<table style="width: 100%; border-collapse: collapse; font-size: 15px">
+<thead><tr><th scope="col">CANDIDATE</th><th scope="col">ROLE</th><th scope="col">STATUS</th><th scope="col">OVERALL</th><th scope="col">DATE</th><th scope="col"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden">Actions</span></th></tr></thead>
+<tbody>
+<tr><td><div style="display: flex; gap: 10px; align-items: center"><div class="av" style="background: #2A2340; color: #D6CBFF">PS</div><div style="display: flex; flex-direction: column"><strong>@priya-builds</strong><span class="dim" style="font-size: 12px">Demo</span></div></div></td><td>Frontend Lead</td><td><span class="tag" style="background: #2A1717; color: #FF9D8A">● Live · 01:46 left</span></td><td class="dim">—</td><td class="m dim" style="font-size: 13px">Today 14:02</td><td style="text-align: right"><a class="bg" href="InterviewLive.dc.html">Watch captions</a></td></tr>
+<tr><td><div style="display: flex; gap: 10px; align-items: center"><div class="av" style="background: #2A2340; color: #B9A6FF">AR</div><div style="display: flex; flex-direction: column"><strong>@arjun-dev</strong><span class="dim" style="font-size: 12px">Demo</span></div></div></td><td>Senior Backend Engineer</td><td><span class="tag" style="background: #1B1728; color: #B9A6FF">Writing report…</span></td><td class="dim">—</td><td class="m dim" style="font-size: 13px">Today 13:40</td><td style="text-align: right"><button class="bg" type="button" disabled style="opacity: .6">Report soon</button></td></tr>
+<tr><td><div style="display: flex; gap: 10px; align-items: center"><div class="av" style="background: #1E2A3D; color: #8FB8FF">MK</div><div style="display: flex; flex-direction: column"><strong>@meera-k</strong><span class="dim" style="font-size: 12px">Demo</span></div></div></td><td>Senior Backend Engineer</td><td><span class="tag" style="background: #10261D; color: #5EE6A8">✓ Done · anchored</span></td><td><strong class="d" style="font-size: 18px">4.3</strong><span class="dim">/5</span></td><td class="m dim" style="font-size: 13px">Yesterday</td><td style="text-align: right"><a class="bp" href="Report.dc.html">Open report</a></td></tr>
+<tr><td><div style="display: flex; gap: 10px; align-items: center"><div class="av" style="background: #22202F; color: #B4AEC4">RK</div><div style="display: flex; flex-direction: column"><strong>@riya-designs</strong><span class="dim" style="font-size: 12px">Demo</span></div></div></td><td>Product Designer</td><td><span class="tag" style="background: #10261D; color: #5EE6A8">✓ Done</span></td><td><strong class="d" style="font-size: 18px">3.8</strong><span class="dim">/5</span></td><td class="m dim" style="font-size: 13px">29 Sep</td><td style="text-align: right"><a class="bp" href="Report.dc.html">Open report</a></td></tr>
+<tr><td><div style="display: flex; gap: 10px; align-items: center"><div class="av" style="background: #22202F; color: #B4AEC4">VS</div><div style="display: flex; flex-direction: column"><strong>@vaibhav-s</strong><span class="dim" style="font-size: 12px">Demo</span></div></div></td><td>Frontend Lead</td><td><span class="tag" style="background: #241D0E; color: #F5C66B">Invited · not started</span></td><td class="dim">—</td><td class="m dim" style="font-size: 13px">28 Sep</td><td style="text-align: right"><button class="bg" type="button">Copy link</button></td></tr>
+<tr><td><div style="display: flex; gap: 10px; align-items: center"><div class="av" style="background: #22202F; color: #B4AEC4">HS</div><div style="display: flex; flex-direction: column"><strong>@harsh-sh</strong><span class="dim" style="font-size: 12px">Demo</span></div></div></td><td>Senior Backend Engineer</td><td><span class="tag" style="background: #2A1717; color: #FF9D8A">Failed · transcript timeout</span></td><td class="dim">—</td><td class="m dim" style="font-size: 13px">27 Sep</td><td style="text-align: right"><button class="bg" type="button">Retry report</button></td></tr>
+</tbody></table>
+</div>
+<p class="dim" style="margin: 0; font-size: 13px">Scores are AI-assisted decision support. There is no automatic rejection — a human decides.</p>
+<section style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #1E1B29"><span class="lbl">OTHER STATES</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><span class="m dim" style="font-size: 12px">EMPTY</span><strong class="d" style="font-size: 18px">No interviews yet</strong><span class="muted" style="font-size: 14px">Find a candidate and press Interview.</span><a class="bp" href="Recruiter.dc.html" style="align-self: flex-start">Find candidates</a></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><span class="m dim" style="font-size: 12px">LOADING</span><div style="height: 14px; background: #1F1B2C; border-radius: 6px"></div><div style="height: 14px; width: 70%; background: #1F1B2C; border-radius: 6px"></div></div>
+</div></section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

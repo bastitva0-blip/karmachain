@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Ask Karma voice</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.025em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#B9A6FF}
+@keyframes bars{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.b{width:6px;height:40px;border-radius:3px;background:#B9A6FF;transform-origin:center;animation:bars 1s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.b{animation:none;transform:scaleY(.6)}}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh; position: relative; overflow: hidden">
+<div aria-hidden="true" style="position: absolute; inset: 0; padding: 48px; opacity: .25; filter: blur(2px); display: flex; flex-direction: column; gap: 20px">
+<div style="height: 80px; width: 40%; background: #1B1728; border-radius: 16px"></div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px"><div style="height: 180px; background: #13111C; border-radius: 16px"></div><div style="height: 180px; background: #13111C; border-radius: 16px"></div><div style="height: 180px; background: #13111C; border-radius: 16px"></div></div>
+<div style="height: 260px; background: #13111C; border-radius: 16px"></div>
+</div>
+<div style="position: absolute; inset: 0; background: #07060BCC"></div>
+<section role="dialog" aria-modal="true" aria-labelledby="ak" style="position: relative; max-width: 1040px; margin: 0 auto; padding: 48px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 24px; align-items: start">
+<div style="background: #13111C; border: 1px solid #2A2638; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 40px 80px -30px #000">
+<div style="display: flex; justify-content: space-between; align-items: center"><h1 id="ak" class="d" style="margin: 0; font-size: 26px">Ask Karma</h1><button type="button" aria-label="Close" style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid #3A3550; background: transparent; color: #EDEAF5; cursor: pointer">✕</button></div>
+<div aria-hidden="true" style="display: flex; gap: 6px; justify-content: center; align-items: center; height: 80px"><span class="b"></span><span class="b" style="animation-delay: .1s"></span><span class="b" style="animation-delay: .2s"></span><span class="b" style="animation-delay: .3s"></span><span class="b" style="animation-delay: .15s"></span><span class="b" style="animation-delay: .25s"></span><span class="b" style="animation-delay: .05s"></span></div>
+<span class="m" style="text-align: center; font-size: 13px; color: #B9A6FF; letter-spacing: .08em">KARMA IS ANSWERING</span>
+<div aria-live="polite" style="display: flex; flex-direction: column; gap: 14px">
+<p class="dim" style="margin: 0">You: "Is priya-builds legit?"</p>
+<p class="d" style="margin: 0; font-size: 22px; line-height: 1.4; font-weight: 500">"Priya holds a Top TypeScript and a Medium Python token, has 18 PRs merged into other people's repos, and four client reviews. Note: this is a demo profile."</p>
+</div>
+<button type="button" style="height: 64px; border-radius: 999px; border: 0; background: #B9A6FF; color: #0B0A10; font: 600 16px 'IBM Plex Sans'; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Hold to talk · or press Space</button>
+<p class="dim" style="margin: 0; font-size: 13px; text-align: center">Answers come only from on-chain data. Tokens show verified work, not character.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<section style="background: #13111C; border: 1px solid #2A2638; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 12px"><span class="lbl">WHAT KARMA CHECKED</span>
+<div class="m" style="padding: 14px; background: #0B0A10; border-radius: 10px; font-size: 13px; line-height: 1.6; color: #C9C4D6">→ get_developer_trust<br>  { handle: "priya-builds" }<br>← found: true · skills: 3<br>  attestations: 4 · is_demo: true</div>
+<span class="dim" style="font-size: 13px">Server tool · secret-authenticated · 340 ms</span></section>
+<section style="background: #13111C; border: 1px solid #2A2638; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 12px"><span class="lbl">TRANSCRIPT</span>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; line-height: 1.5"><li><span class="m dim">00:02</span> <strong>Karma</strong> Tell me a GitHub handle and I'll check what's verified.</li><li><span class="m dim">00:06</span> <strong style="color: #8FB8FF">You</strong> Is priya-builds legit?</li><li><span class="m dim">00:08</span> <strong>Karma</strong> Priya holds a Top TypeScript…</li></ol></section>
+<section style="background: #13111C; border: 1px dashed #3A3550; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span class="m dim" style="font-size: 12px">STATE · NOT FOUND</span><span class="muted" style="font-size: 14px">"I couldn't find that profile." — never guesses.</span></section>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

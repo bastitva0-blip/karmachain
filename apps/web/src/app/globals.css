@@ -1,0 +1,219 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * KarmaChain tokens (docs/design/DESIGN.md). Near-black ground, one lavender accent,
+ * tier colours that differ in lightness, not just hue.
+ */
+:root {
+  --radius: 10px;
+
+  --ground: #0b0a10;
+  --ground-deep: #07060b;
+  --surface: #13111c;
+  --surface-2: #1b1728;
+  --border-soft: #1e1b29;
+  --border: #22202f;
+  --border-strong: #3a3550;
+  --ink: #edeaf5;
+  --ink-muted: #b4aec4;
+  --ink-dim: #8e88a0;
+  --karma: #b9a6ff;
+  --karma-hover: #d6cbff;
+  --track: #241f33;
+  --skeleton: #1f1b2c;
+  --avatar: #2a2340;
+
+  --tier-top: #f5c66b;
+  --tier-top-ink: #2a1c00;
+  --tier-medium: #8fb8ff;
+  --tier-medium-ink: #04122b;
+  --tier-basic: #3a3550;
+  --tier-basic-ink: #edeaf5;
+  --tier-basic-ring: #b4aec4;
+
+  --verified: #5ee6a8;
+  --verified-bg: #10261d;
+  --verified-border: #1e4a36;
+  --warning: #f5c66b;
+  --warning-bg: #241d0e;
+  --warning-border: #5a4420;
+  --warning-ink: #e8d6b0;
+  --error: #ff9d8a;
+  --error-bg: #2a1717;
+  --error-border: #4a2a2a;
+  --error-ink: #f3d5cf;
+  --danger: #e5484d;
+  --concern: #ffb37a;
+  --live: #ff7a66;
+
+  /* shadcn-style aliases used by the primitives */
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--karma);
+  --primary-foreground: var(--ground);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--track);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--surface-2);
+  --accent-foreground: var(--ink);
+  --destructive: var(--error);
+  --input: var(--border-strong);
+  --ring: var(--karma);
+}
+
+@theme inline {
+  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-display: var(--font-bricolage), var(--font-plex-sans), sans-serif;
+
+  --color-ground: var(--ground);
+  --color-ground-deep: var(--ground-deep);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border-soft: var(--border-soft);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-dim: var(--ink-dim);
+  --color-karma: var(--karma);
+  --color-karma-hover: var(--karma-hover);
+  --color-track: var(--track);
+  --color-skeleton: var(--skeleton);
+  --color-avatar: var(--avatar);
+
+  --color-tier-top: var(--tier-top);
+  --color-tier-top-ink: var(--tier-top-ink);
+  --color-tier-medium: var(--tier-medium);
+  --color-tier-medium-ink: var(--tier-medium-ink);
+  --color-tier-basic: var(--tier-basic);
+  --color-tier-basic-ink: var(--tier-basic-ink);
+
+  --color-verified: var(--verified);
+  --color-verified-bg: var(--verified-bg);
+  --color-verified-border: var(--verified-border);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-border: var(--warning-border);
+  --color-warning-ink: var(--warning-ink);
+  --color-error: var(--error);
+  --color-error-bg: var(--error-bg);
+  --color-error-border: var(--error-border);
+  --color-error-ink: var(--error-ink);
+  --color-danger: var(--danger);
+  --color-concern: var(--concern);
+  --color-live: var(--live);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-ground font-sans text-ink antialiased;
+  }
+  a {
+    color: var(--karma);
+  }
+  a:hover {
+    color: var(--karma-hover);
+  }
+  :focus-visible {
+    outline: 2px solid var(--karma);
+    outline-offset: 3px;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Mono eyebrow label: 12px uppercase, tracking .06em, accent. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--karma);
+  }
+  .display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(#ffffff08 1px, transparent 1px),
+      linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .container-kc {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+}
+
+@keyframes kc-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+.kc-orb {
+  animation: kc-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .kc-orb {
+    animation: none !important;
+  }
+}

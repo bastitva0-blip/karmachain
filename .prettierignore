@@ -1,0 +1,6 @@
+node_modules
+.next
+dist
+pnpm-lock.yaml
+prompt.md
+packages/contracts/lib

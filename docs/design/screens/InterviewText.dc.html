@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Text interview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.02em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;background:#B9A6FF;color:#0B0A10;border:0;border-radius:10px;font:600 15px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer}
+.bg{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 14px;background:transparent;color:#EDEAF5;border:1px solid #3A3550;border-radius:10px;font:500 14px 'IBM Plex Sans',sans-serif;cursor:pointer}
+.k{align-self:flex-start;max-width:75%;padding:14px 16px;background:#1B1728;border-radius:14px 14px 14px 4px;line-height:1.55;display:flex;flex-direction:column;gap:8px}
+.u{align-self:flex-end;max-width:75%;padding:14px 16px;background:#B9A6FF;color:#0B0A10;border-radius:14px 14px 4px 14px;line-height:1.55}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh; display: flex; flex-direction: column">
+<header style="padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1E1B29; gap: 16px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 2px"><span class="d" style="font-weight: 700; font-size: 18px">Senior Backend Engineer · text mode</span><span class="dim" style="font-size: 13px">Same questions as the voice interview</span></div>
+<div style="display: flex; gap: 12px; align-items: center">
+<label style="display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox" checked style="accent-color: #B9A6FF; width: 18px; height: 18px">Read questions aloud</label>
+<span role="timer" class="m" style="padding: 8px 14px; border-radius: 999px; background: #13111C; border: 1px solid #2A2638">01:48</span>
+<a class="bp" href="Report.dc.html">Finish</a>
+</div>
+</header>
+<main aria-live="polite" style="flex-grow: 1; max-width: 860px; width: 100%; margin: 0 auto; padding: 32px 24px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+<div class="k"><span>Your TypeScript project blocks merges on failing tests. How did you decide what to test first?</span></div>
+<div class="u">The payment state machine, because every bug there costs money. UI came later.</div>
+<div class="k"><span>Good. A payment webhook fires twice. How do you make sure the customer is charged only once?</span><button class="bg" type="button" aria-label="Replay question audio" style="align-self: flex-start; height: 32px; font-size: 13px">▶ Replay</button></div>
+</main>
+<form style="max-width: 860px; width: 100%; margin: 0 auto; padding: 0 24px 32px; display: flex; gap: 10px; box-sizing: border-box">
+<label for="a" style="position: absolute; width: 1px; height: 1px; overflow: hidden">Your answer</label>
+<textarea id="a" placeholder="Type your answer…" style="flex-grow: 1; height: 88px; padding: 14px; background: #13111C; border: 1px solid #3A3550; border-radius: 12px; color: #EDEAF5; font: 15px 'IBM Plex Sans'; resize: none"></textarea>
+<button class="bp" type="submit" style="align-self: flex-end">Send</button>
+</form>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

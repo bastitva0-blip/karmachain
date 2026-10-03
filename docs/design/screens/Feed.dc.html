@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KarmaChain — Proof feed</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A10}
+a{color:#B9A6FF}
+.d{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-0.025em}
+.m{font-family:'IBM Plex Mono',monospace}
+.muted{color:#B4AEC4}.dim{color:#8E88A0}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#B9A6FF}
+.card{background:#13111C;border:1px solid #22202F;border-radius:16px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.bp{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;background:#B9A6FF;color:#0B0A10;border:0;border-radius:10px;font:600 15px 'IBM Plex Sans';cursor:pointer;text-decoration:none}
+.act{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;border:1px solid transparent;background:transparent;color:#B4AEC4;font:500 14px 'IBM Plex Sans';cursor:pointer}
+.act:hover{border-color:#3A3550;color:#EDEAF5}
+.side a{display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-radius:10px;color:#B4AEC4;text-decoration:none;font-size:15px}
+.side a[aria-current]{background:#1B1728;color:#EDEAF5;font-weight:600}
+.proof{display:flex;gap:14px;align-items:center;padding:14px;border-radius:12px;background:#0B0A10;border:1px solid #22202F}
+.av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+</style>
+</helmet>
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #EDEAF5; background: #0B0A10; min-height: 100vh">
+<header style="border-bottom: 1px solid #1E1B29; position: sticky; top: 0; background: #0B0A10F0; z-index: 3">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #EDEAF5"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#B9A6FF"/><path d="M24 17v30M24 35l15-18M30 29l11 18" stroke="#0B0A10" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="d" style="font-weight: 700; font-size: 19px">KarmaChain</span></a>
+<label style="flex-grow: 1; max-width: 460px; position: relative"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden">Search</span><input placeholder="Search people, skills, proofs" style="width: 100%; box-sizing: border-box; height: 42px; padding: 0 14px; background: #13111C; border: 1px solid #22202F; border-radius: 10px; color: #EDEAF5; font: 15px 'IBM Plex Sans'"></label>
+<div style="width: 36px; height: 36px; border-radius: 50%; background: #2A2340; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #D6CBFF; font-size: 13px">PS</div>
+</div>
+</header>
+
+<div style="max-width: 1280px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 240px minmax(0, 1fr) 300px; gap: 24px; align-items: start">
+<nav class="side" aria-label="Feed" style="display: flex; flex-direction: column; gap: 4px; position: sticky; top: 88px">
+<a href="#" aria-current="page">Proof feed</a><a href="#">Following</a><a href="#">Endorsements</a><a href="Recruiter.dc.html">Open roles</a><a href="Profile.dc.html">My profile</a>
+<div class="card" style="margin-top: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px"><span class="lbl">HOW RANKING WORKS</span><p class="muted" style="margin: 0; font-size: 13px; line-height: 1.5">Posts rise on verified proof and signed endorsements, weighted by the endorser's tier. No proof, no boost.</p></div>
+</nav>
+
+<main style="display: flex; flex-direction: column; gap: 16px">
+<section class="card" aria-label="New post" style="padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 12px"><div class="av" style="background: #2A2340; color: #D6CBFF">PS</div><label style="flex-grow: 1"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden">Post text</span><textarea placeholder="What did you ship? Attach the proof." style="width: 100%; box-sizing: border-box; height: 84px; padding: 12px; background: #0B0A10; border: 1px solid #3A3550; border-radius: 12px; color: #EDEAF5; font: 15px/1.5 'IBM Plex Sans'; resize: vertical">Shipped CRDT-based offline sync for a 4k★ notes app. Wrote up the three conflict cases that bit us.</textarea></label></div>
+<div class="proof" style="border-color: #1E4A36"><span style="width: 36px; height: 36px; border-radius: 10px; background: #10261D; color: #5EE6A8; display: flex; align-items: center; justify-content: center">✓</span><div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><strong style="font-size: 14px">Merged PR · notesync/core #812</strong><span class="m dim" style="font-size: 12px">merged 2 Oct · verified via GitHub</span></div><button class="act" type="button" aria-label="Remove attached proof">✕</button></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<div style="display: flex; gap: 6px; flex-wrap: wrap"><button class="act" type="button" style="border-color: #3A3550">+ Token</button><button class="act" type="button" style="border-color: #3A3550">+ Merged PR</button><button class="act" type="button" style="border-color: #3A3550">+ Review</button><button class="act" type="button" style="border-color: #3A3550">+ Interview</button></div>
+<button class="bp" type="button">Post with proof</button>
+</div>
+</section>
+
+<div role="tablist" aria-label="Sort" style="display: flex; gap: 8px"><button role="tab" aria-selected="true" type="button" class="act" style="background: #1B1728; color: #EDEAF5">Most proven</button><button role="tab" aria-selected="false" type="button" class="act">Latest</button><button role="tab" aria-selected="false" type="button" class="act">Hiring</button></div>
+
+<article class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 12px; align-items: center"><div class="av" style="background: #2A2340; color: #D6CBFF">PS</div><div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><strong>Priya Sharma</strong><span class="tag" style="background: #F5C66B; color: #2A1C00">TypeScript · Top</span><span class="tag" style="border: 1px solid #3A3550; color: #B4AEC4; font-weight: 500">Demo</span></div><span class="dim" style="font-size: 13px">Frontend · 2h</span></div></div>
+<p style="margin: 0; line-height: 1.6; font-size: 16px">Got my offline-sync PR merged into a 4k★ repo. Three lessons: tombstones need TTLs, clocks lie, and tests should replay real conflict logs.</p>
+<div class="proof"><span style="width: 36px; height: 36px; border-radius: 10px; background: #10261D; color: #5EE6A8; display: flex; align-items: center; justify-content: center">✓</span><div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><strong style="font-size: 14px">Merged PR · notesync/core #812</strong><span class="m dim" style="font-size: 12px">+1,204 −310 · 14 review comments resolved</span></div><a href="#" style="font-size: 13px">View ↗</a></div>
+<div style="display: flex; gap: 4px; flex-wrap: wrap; align-items: center; border-top: 1px solid #22202F; padding-top: 10px"><button class="act" type="button">✍ Endorse <span class="m">12</span></button><button class="act" type="button">Reply <span class="m">4</span></button><button class="act" type="button">Repost</button><span class="dim" style="margin-left: auto; font-size: 13px">3 endorsements from Top-tier devs</span></div>
+</article>
+
+<article class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 12px; align-items: center"><div class="av" style="background: #1E2A3D; color: #8FB8FF">RK</div><div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><strong>Riya Kapoor</strong><span class="tag" style="background: #8FB8FF; color: #04122B">Portfolio · Medium</span><span class="tag" style="border: 1px solid #3A3550; color: #B4AEC4; font-weight: 500">Demo</span></div><span class="dim" style="font-size: 13px">Designer · 5h</span></div></div>
+<p style="margin: 0; line-height: 1.6; font-size: 16px">My client just voice-signed a review for the metro wayfinding project. First on-chain reference I've ever had.</p>
+<div class="proof"><span style="width: 36px; height: 36px; border-radius: 10px; background: #1B1728; color: #F5C66B; display: flex; align-items: center; justify-content: center">★</span><div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><strong style="font-size: 14px">Client review · 5/5 · Wayfinding</strong><span class="m dim" style="font-size: 12px">EAS · attester 0x19bd…44e1</span></div><a href="#" style="font-size: 13px">EAS ↗</a></div>
+<div style="display: flex; gap: 4px; flex-wrap: wrap; align-items: center; border-top: 1px solid #22202F; padding-top: 10px"><button class="act" type="button">✍ Endorse <span class="m">7</span></button><button class="act" type="button">Reply <span class="m">2</span></button><button class="act" type="button">Repost</button></div>
+</article>
+
+<article class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 14px; border-style: dashed">
+<div style="display: flex; gap: 12px; align-items: center"><div class="av" style="background: #22202F; color: #B4AEC4">NK</div><div style="display: flex; flex-direction: column; gap: 2px"><strong>Nikhil K.</strong><span class="dim" style="font-size: 13px">8h</span></div></div>
+<p style="margin: 0; line-height: 1.6; font-size: 16px">10x engineer, built 40 startups, DM for collabs.</p>
+<div style="padding: 10px 12px; border-radius: 10px; background: #241D0E; color: #E8D6B0; font-size: 13px">No proof attached · shown lower in the feed</div>
+</article>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 1px solid #1E1B29">
+<span class="lbl">OTHER STATES</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px">
+<div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 8px"><span class="m dim" style="font-size: 12px">EMPTY FEED</span><strong class="d">Follow people by skill</strong><span class="muted" style="font-size: 13px">We'll suggest Top-tier devs in your stack.</span></div>
+<div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 8px; border-color: #5A4420"><span class="m" style="font-size: 12px; color: #F5C66B">ENDORSE NEEDS WALLET</span><strong class="d">Sign to endorse</strong><span class="muted" style="font-size: 13px">Endorsements are signatures, so they can't be botted.</span></div>
+<div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 8px; border-color: #4A2A2A"><span class="m" style="font-size: 12px; color: #FF9D8A">PROOF NOT OURS</span><strong class="d">That PR isn't yours</strong><span class="muted" style="font-size: 13px">Only proofs linked to your GitHub can be attached.</span></div>
+</div>
+</section>
+</main>
+
+<aside style="display: flex; flex-direction: column; gap: 16px; position: sticky; top: 88px">
+<section class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px"><span class="lbl">YOUR PROOF</span><div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="tag" style="background: #F5C66B; color: #2A1C00">TS · Top</span><span class="tag" style="background: #8FB8FF; color: #04122B">Py · Medium</span><span class="tag" style="background: #3A3550; color: #EDEAF5">UI · Basic</span></div><span class="muted" style="font-size: 13px">48 endorsements received · 9 given</span></section>
+<section class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px"><span class="lbl">TRENDING VERIFIED SKILLS</span><ol style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 14px"><li>Rust <span class="dim">· 31 new Top tokens</span></li><li>CRDTs <span class="dim">· 18 merged PRs</span></li><li>Solidity <span class="dim">· 12 reviews</span></li></ol></section>
+<section class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px"><span class="lbl">ROLES MATCHING YOU</span><div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 15px">Frontend Lead · Paylane</strong><span class="dim" style="font-size: 13px">Needs TypeScript · Top · you qualify</span></div><a class="bp" href="InterviewPre.dc.html" style="height: 40px; font-size: 14px">Take the voice interview</a></section>
+</aside>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>
