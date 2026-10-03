@@ -8,6 +8,7 @@ import { refreshProfile } from "../profile";
 import type { User } from "../types";
 import { txUrl } from "./client";
 import { invalidateReader } from "./reader";
+import { publishProof } from "../vakh/publish";
 import { mintOrUpdate, onchainTokenFor } from "./sbt";
 
 export interface MintOutcome {
@@ -61,6 +62,8 @@ export async function mintAnalysis(user: User, analysisId: string): Promise<Mint
     .where(and(eq(schema.analyses.id, a.id), eq(schema.analyses.userId, user.id)));
   invalidateReader(owner);
   refreshProfile(user).catch((err: unknown) => log.warn("profile refresh failed", { err }));
+  // List the proof in the public Vakh directory (opted-in users only). Never blocks the mint.
+  void publishProof(a.id);
   // System flag: a very new GitHub account minting Medium or above is worth a human look.
   const ageDays = user.githubCreatedAt ? (Date.now() - user.githubCreatedAt.getTime()) / 864e5 : null;
   if (ageDays !== null && ageDays < 14 && a.tier !== "basic") {

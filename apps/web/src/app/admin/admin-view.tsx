@@ -15,6 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AddressLink, TxLink, truncate } from "@/components/tx-link";
 import { api, ApiError, errorMessage } from "@/lib/api";
 import { cn } from "@/lib/utils";
+import { VakhPanel } from "./vakh-panel";
 
 interface Flag {
   id: string;
@@ -285,6 +286,7 @@ function Dashboard({ data }: { data: Overview }) {
         )}
 
         <RelayerHealth relayer={data.relayer} />
+        <VakhPanel />
       </div>
 
       {selected ? (

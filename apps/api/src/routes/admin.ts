@@ -15,6 +15,7 @@ import { healthChecks } from "../lib/health";
 import { rateLimit } from "../lib/ratelimit";
 import { body } from "../lib/validate";
 import { findUserByHandleOrAddress } from "../profile";
+import { archiveProofsForToken } from "../vakh/publish";
 import type { AppEnv } from "../types";
 
 export const admin = new Hono<AppEnv>();
@@ -33,7 +34,7 @@ async function isOnchainAdmin(address: Address): Promise<boolean> {
 }
 
 /** Admin = holder of DEFAULT_ADMIN_ROLE on KarmaSBT, proven by an EIP-191 signature. */
-function requireAdmin(c: Context<AppEnv>): Address {
+export function requireAdmin(c: Context<AppEnv>): Address {
   const raw = getCookie(c, COOKIE);
   if (!raw) throw unauthorized("Admin sign-in required");
   const [address, exp, mac] = raw.split(".");
@@ -178,6 +179,7 @@ admin.post("/admin/flags/:id/revoked", async (c) => {
   await db.update(schema.analyses).set({ revokedAt: new Date(), revokeReason: reason }).where(eq(schema.analyses.tokenId, revokedId));
   const [owner] = f.userId ? await db.select().from(schema.users).where(eq(schema.users.id, f.userId)).limit(1) : [];
   if (owner?.walletAddress) invalidateReader(owner.walletAddress);
+  void archiveProofsForToken(revokedId);
   return c.json({ ok: true, tokenId: revokedId });
 });
 

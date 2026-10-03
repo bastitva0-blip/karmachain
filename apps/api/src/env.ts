@@ -41,6 +41,12 @@ const EnvSchema = z.object({
   EAS_SCHEMA_REVIEW_UID: optional,
   EAS_SCHEMA_INTERVIEW_UID: optional,
   MAX_GAS_PRICE_GWEI: z.coerce.number().positive().default(5),
+  /** Vakh MCP server (Streamable HTTP). OAuth discovery runs against its origin. */
+  VAKH_MCP_URL: z.url().default("https://xo.vakh.com/mcp"),
+  /** Public web app, used for links to forms and posts. */
+  VAKH_APP_URL: z.url().default("https://vakh.com"),
+  /** Where Vakh redirects after OAuth. Must be the web origin's /api/vakh/callback (proxied to the API). */
+  VAKH_CALLBACK_URL: z.url().default("http://localhost:3000/api/vakh/callback"),
 });
 
 export type Env = z.infer<typeof EnvSchema>;

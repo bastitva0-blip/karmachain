@@ -8,6 +8,7 @@ import { destroySession } from "../auth/session";
 import { rateLimit } from "../lib/ratelimit";
 import { body } from "../lib/validate";
 import type { AppEnv, User } from "../types";
+import { syncUserProofs } from "../vakh/publish";
 
 export const publicUser = (u: User) => ({
   id: u.id,
@@ -35,6 +36,7 @@ me.post("/me/consent", async (c) => {
     .set({ consentSearchable: searchable })
     .where(eq(schema.users.id, user.id))
     .returning();
+  if (searchable !== user.consentSearchable) void syncUserProofs(user.id, searchable);
   return c.json({ user: publicUser(u!) });
 });
 
@@ -42,6 +44,8 @@ me.post("/me/consent", async (c) => {
 me.delete("/me", async (c) => {
   const user = requireUser(c);
   const db = await getDb();
+  // Archive public Vakh directory posts before the rows that point at them are deleted.
+  await syncUserProofs(user.id, false);
   await destroySession(c);
   await db.delete(schema.users).where(eq(schema.users.id, user.id));
   return c.json({ ok: true, note: "Off-chain data deleted. On-chain tokens can be revoked by an admin on request." });

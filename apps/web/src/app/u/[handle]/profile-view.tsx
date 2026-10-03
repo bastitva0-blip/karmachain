@@ -38,6 +38,12 @@ export function ProfileView({ handle }: { handle: string }) {
       })),
     retry: (n, e) => !(e instanceof ApiError && e.status === 404) && n < 1,
   });
+  // Public Vakh directory posts for this developer's proofs (optional, never blocks the page).
+  const vakh = useQuery({
+    queryKey: ["vakh-proofs", handle],
+    queryFn: () => api<{ items: { skill: string; url: string }[] }>(`/vakh/proofs/${encodeURIComponent(handle)}`).then((r) => new Map(r.items.map((i) => [i.skill, i.url]))),
+    retry: false,
+  });
 
   if (q.isLoading || (!q.data && !q.error)) {
     return (
@@ -159,7 +165,7 @@ export function ProfileView({ handle }: { handle: string }) {
             <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-3">
               {p.skills.map((s, i) => (
                 <motion.li key={s.skill} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
-                  <SkillCard s={s} />
+                  <SkillCard s={s} vakhUrl={vakh.data?.get(s.skill) ?? null} />
                 </motion.li>
               ))}
             </ul>
@@ -207,7 +213,7 @@ function Stat({ value, label }: { value: React.ReactNode; label: string }) {
   );
 }
 
-function SkillCard({ s }: { s: ProfileSkill }) {
+function SkillCard({ s, vakhUrl }: { s: ProfileSkill; vakhUrl: string | null }) {
   const sbt = process.env.NEXT_PUBLIC_SBT_ADDRESS || deployments.sbt;
   const basescan = s.onchain?.txUrl ?? (s.onchain ? `${BASESCAN}/token/${sbt}?a=${s.onchain.tokenId}` : null);
   return (
@@ -233,6 +239,13 @@ function SkillCard({ s }: { s: ProfileSkill }) {
           <Button asChild variant="outline" className="grow">
             <a href={basescan} target="_blank" rel="noreferrer">
               Basescan ↗
+            </a>
+          </Button>
+        )}
+        {vakhUrl && (
+          <Button asChild variant="outline" className="grow">
+            <a href={vakhUrl} target="_blank" rel="noopener noreferrer" title="This proof in the public Vakh directory">
+              Vakh ↗
             </a>
           </Button>
         )}

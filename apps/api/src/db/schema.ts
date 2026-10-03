@@ -72,6 +72,8 @@ export const analyses = pgTable(
     mintTx: text("mint_tx"),
     revokedAt: timestamp("revoked_at", { withTimezone: true }),
     revokeReason: text("revoke_reason"),
+    /** Post UUID in the public Vakh directory form, once published. */
+    vakhPostId: text("vakh_post_id"),
     createdAt: createdAt(),
   },
   (t) => [
@@ -208,4 +210,18 @@ export const flags = pgTable("flags", {
   revokeTx: text("revoke_tx"),
   createdAt: createdAt(),
   resolvedAt: timestamp("resolved_at", { withTimezone: true }),
+});
+
+// ---------------------------------------------------------------- vakh
+
+/**
+ * Small encrypted key/value store for the Vakh integration: OAuth client registrations,
+ * rotating refresh tokens (studio account and recruiter connections), pending PKCE state,
+ * and the ids of forms we created. Values are AES-GCM encrypted JSON (lib/crypto).
+ */
+export const vakhKv = pgTable("vakh_kv", {
+  key: text("key").primaryKey(),
+  encValue: text("enc_value").notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });

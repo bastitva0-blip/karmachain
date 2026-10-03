@@ -19,6 +19,7 @@ import { interviews } from "./routes/interviews";
 import { voice } from "./routes/voice";
 import { reviews } from "./routes/reviews";
 import { ingest } from "./routes/ingest";
+import { vakh } from "./routes/vakh";
 import type { AppEnv } from "./types";
 
 export const app = new Hono<AppEnv>();
@@ -65,6 +66,7 @@ app.route("/", interviews);
 app.route("/", voice);
 app.route("/", reviews);
 app.route("/", ingest);
+app.route("/", vakh);
 
 app.notFound((c) => c.json({ error: { code: "not_found", message: "Route not found" } }, 404));
 

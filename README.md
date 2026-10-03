@@ -11,6 +11,8 @@ Proof → Profile → Match → Interview
 
 Built for CodeBlitz 2.0 (6-hour hackathon) and the ElevenLabs voice track. See [`docs/ELEVENLABS_SETUP.md`](docs/ELEVENLABS_SETUP.md) for exactly where ElevenLabs is used.
 
+**Vakh integration:** minted proofs are published to a public Vakh directory over MCP, and recruiters can send shortlists to a pipeline board in their own Vakh. See [`docs/VAKH.md`](docs/VAKH.md).
+
 ## Architecture
 
 ```mermaid

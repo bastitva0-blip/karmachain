@@ -20,6 +20,7 @@ import { recruiterHeaders } from "@/lib/recruiter-key";
 import { postSse } from "@/lib/sse";
 import { cn } from "@/lib/utils";
 import { JobSettings, emptySpec } from "./job-settings";
+import { VakhExport } from "./vakh-export";
 
 interface ChatMsg {
   role: "user" | "assistant";
@@ -44,6 +45,27 @@ export function RecruiterView() {
   const [settingsOpen, setSettingsOpen] = useState(true);
   const [launching, setLaunching] = useState<string | null>(null);
   const feedRef = useRef<HTMLDivElement>(null);
+
+  // Back from Vakh sign-in: restore the job and say how it went.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const job = params.get("job");
+    const outcome = params.get("vakh");
+    if (!job && !outcome) return;
+    window.history.replaceState(null, "", "/recruiter");
+    if (outcome === "connected") toast.success("Vakh connected");
+    else if (outcome === "error") toast.error("Vakh sign-in didn't finish. Try again.");
+    if (job && /^[A-Za-z0-9-]{8,64}$/.test(job)) {
+      api<{ jobSpecId: string; spec: JobSpec; style: InterviewerStyle | null }>(`/recruiter/jobs/${job}`, { headers: recruiterHeaders() })
+        .then((r) => {
+          setJobSpecId(r.jobSpecId);
+          setSpec(r.spec);
+          setStyle(r.style);
+          setMsgs((m) => [...m, { role: "assistant", text: `Welcome back. Restored: ${r.spec.seniority} ${r.spec.title}.` }]);
+        })
+        .catch(() => undefined);
+    }
+  }, []);
 
   useEffect(() => {
     const el = feedRef.current;
@@ -283,6 +305,7 @@ export function RecruiterView() {
               ))}
             </ul>
           )}
+          {jobSpecId && matches.data && matches.data.length > 0 && <VakhExport jobSpecId={jobSpecId} count={matches.data.length} />}
         </section>
       </div>
       <AskKarma />
