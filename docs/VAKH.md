@@ -8,7 +8,10 @@ KarmaChain talks to [Vakh](https://vakh.com) over its MCP server (`https://xo.va
 |---|---|---|---|
 | **Public proof directory**: every minted, non-revoked proof of a developer who opted in to discovery becomes a post in "KarmaChain · Verified Developers" (feed, directory table, by-tier board, stats dashboard) | KarmaChain studio | `get_form`, `create_form`, `unarchive_form`, `create_post` | After a successful mint (`chain/mint.ts`), when a developer opts in, or "Publish waiting proofs" in `/admin` |
 | **Revocation and opt-out**: the post is archived (reversible in Vakh) | KarmaChain studio | `archive_post` | Admin revoke (`/admin/flags/:id/revoked`), opt-out, account deletion |
-| **Recruiter pipeline**: the shortlist becomes cards on a "KarmaChain Pipeline" kanban (Shortlisted → Contacted → Interviewing → Offer / Passed) in the recruiter's own Vakh, each linked by `reference` to the candidate's public proof posts | Recruiter's own | `create_form`, `query_view` (dedupe), `create_post` | "Send shortlist to Vakh" on `/recruiter` |
+| **Recruiter pipeline**: the shortlist becomes cards on a "KarmaChain Pipeline" kanban (Shortlisted → Contacted → Interviewing → Offer / Passed) in the recruiter's own Vakh, each linked by `reference` to the candidate's public proof posts | Recruiter's own | `create_form`, `update_form`, `query_view` (dedupe), `create_post` | "Send shortlist to Vakh" on `/recruiter` |
+| **Pipeline drives interviews** (Vakh → KarmaChain): a card moved to **Interviewing** in Vakh gets an AI voice interview, and its link is written back on the card (`interview`, `karma_status`). When the interview is scored, the report link and overall score are written back (`report`) | Recruiter's own | `query_view`, `update_post` | Background sync every `VAKH_SYNC_INTERVAL_SEC` (default 120 s), plus the **Sync** button on `/recruiter` |
+
+The board in Vakh is the source of truth for stages. KarmaChain never moves a card itself, so the hiring decision stays with the recruiter.
 
 Because both forms are ordinary Vakh forms, people can follow the directory, and the recruiter's own assistant can read or update the pipeline over the same MCP server (`query_view`, `aggregate_view`, `update_post` to move stages).
 
@@ -17,7 +20,7 @@ Because both forms are ordinary Vakh forms, people can follow the directory, and
 1. Deploy with the migration `0002_vakh.sql` (runs automatically on boot).
 2. Set `VAKH_CALLBACK_URL` to `<web origin>/api/vakh/callback` (the default suits local dev).
 3. Sign in to `/admin` → **Vakh directory** → **Connect studio account** and approve on Vakh.
-4. **Create directory form**, then **Publish waiting proofs** to backfill.
+4. **Create directory form**, then **Publish waiting proofs** to backfill. To reuse an existing directory form (and keep its public link), set `VAKH_DIRECTORY_FORM_ID` first; the same Vakh account must own it.
 5. In Vakh, make the directory form public (sharing is human-only in Vakh, not available over MCP). Until then, recruiter pipelines are still created, just without proof links.
 
 ## Design notes
@@ -26,4 +29,6 @@ Because both forms are ordinary Vakh forms, people can follow the directory, and
 - **Failure isolation.** Vakh calls have a 20 s timeout and retry on network or 5xx errors, plus one retry with a forced refresh on 401. Publishing is fire-and-forget after a mint: a Vakh outage never blocks or fails a mint, and "Publish waiting proofs" catches up later.
 - **Idempotency.** `analyses.vakh_post_id` is re-checked inside each retried unit; pipeline export skips candidates already on the board for that job (`query_view` on `job_ref`).
 - **Consent.** Only `consent_searchable` developers are listed. Post text is built from stored evidence fields only (no LLM), so it cannot claim anything the evidence doesn't contain.
+- **Interview idempotency.** Each card's interview id is stored in `vakh_kv` (`pipeline-interview:<postId>`), so a retried or repeated sync never creates a second interview. Cards are matched to jobs by the job id prefix in `job_ref`, scoped to that recruiter.
+- **Form definitions.** Names, descriptions, field descriptions and views are re-applied on setup and on every export (`update_form`). Vakh replaces `fields` wholesale, so saved fields the code no longer lists are carried over unchanged.
 - **Schema stability.** Vakh field ids are immutable. Add fields in `vakh/forms.ts`; never rename them.

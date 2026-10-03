@@ -96,6 +96,7 @@
 | **Vakh** | Public "Verified Developers" directory (feed · table · board · dashboard) | ✅ |
 | | Recruiter pipeline board with cross-form proof references | ✅ |
 | | Auto-archive on revoke, opt-out or account deletion | ✅ |
+| | Vakh board stage → AI interview → report written back to the card | ✅ |
 | **Social** | Proof feed with wallet-signed, tier-weighted endorsements | ✅ |
 
 ---
@@ -162,6 +163,7 @@ KarmaChain is an **MCP client** of [Vakh](https://vakh.com) (`https://xo.vakh.co
 | **Public proof directory** — "KarmaChain · Verified Developers" with Latest, Directory, By-tier and Stats views | KarmaChain studio | `get_form` · `create_form` · `update_form` · `create_post` | Mint by an opted-in developer, opt-in, or admin backfill |
 | **Revocation & opt-out** — post archived (reversible) | KarmaChain studio | `archive_post` | Admin revoke, opt-out, account deletion |
 | **Recruiter pipeline** — Shortlisted → Contacted → Interviewing → Offer / Passed, each card linked to public proof posts | Recruiter's own Vakh | `create_form` · `query_view` · `create_post` (with `reference`) | "Send shortlist to Vakh" on `/recruiter` |
+| **Board drives interviews** — move a card to Interviewing in Vakh → KarmaChain creates the AI voice interview and writes the link back; the report and score follow when it's scored | Recruiter's own Vakh | `query_view` · `update_post` | Background sync (2 min) + **Sync** on `/recruiter` |
 
 - Rotating refresh tokens stored AES-GCM encrypted, refreshes serialised per account
 - 20 s timeouts, retry on network / 5xx, one forced-refresh retry on 401
@@ -272,7 +274,7 @@ All variables are in [`.env.example`](.env.example). Secrets belong to the **api
 | AI | `NVIDIA_API_KEY`, `NVIDIA_LLM_MODEL`, `NVIDIA_EMBED_MODEL` |
 | Voice | `ELEVENLABS_API_KEY`, `ELEVENLABS_INTERVIEW_AGENT_ID`, `ELEVENLABS_VERIFY_AGENT_ID`, `ELEVENLABS_TOOL_SECRET` |
 | Chain | `RPC_URL`, `RELAYER_PRIVATE_KEY`, `SBT_ADDRESS`, `EAS_SCHEMA_*`, `MAX_GAS_PRICE_GWEI` |
-| Vakh | `VAKH_MCP_URL`, `VAKH_APP_URL`, `VAKH_CALLBACK_URL` (no API key — OAuth) |
+| Vakh | `VAKH_MCP_URL`, `VAKH_APP_URL`, `VAKH_CALLBACK_URL`, `VAKH_DIRECTORY_FORM_ID`, `VAKH_SYNC_INTERVAL_SEC` (no API key — OAuth) |
 | Web | `NEXT_PUBLIC_API_BASE`, `NEXT_PUBLIC_CHAIN_ID`, `API_INTERNAL_URL` (build + runtime) |
 
 ---
